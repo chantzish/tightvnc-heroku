@@ -15,6 +15,8 @@ printf "%s" "$VNC_PASS" | vncpasswd -f > /home/user/.vnc/passwd
 printf "%s\n" "$HEROKU_LOGIN" > .netrc
 printf "%s" "$IDENTITY" > .ssh/id_rsa
 printf "%s" "$GDRIVE_TOKEN" > .gdrive/token_v2.json
+gdrive download $TELEGRAM_LOCAL
+tar zxf telegram.local.tar.gz
 git config --global user.email "chantzish@gmail.com"
 git config --global user.name "chantzish"
 git config --global credential.helper store
