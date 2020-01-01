@@ -133,6 +133,7 @@ RUN echo 1234 | sudo -S apt update && \
     heroku version && \
     sudo wget "https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64" -O /usr/local/sbin/gdrive && \
     sudo chmod +x /usr/local/sbin/gdrive && \
+    mkdir .gdrive && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
