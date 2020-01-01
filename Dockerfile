@@ -101,6 +101,9 @@ RUN echo 1234 | sudo -S apt update && \
         #default-jdk \
         libssl-dev libffi-dev python-dev python3-dev ncurses-dev python-pip python3-pip virtualenv \
         #openjdk-8-jdk \
+        fonts-liberation libappindicator1 \
+        debootstrap \
+        schroot \
         cgroup-tools && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
@@ -126,7 +129,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo sed -i 's/#Port 22/Port 2200/' /etc/ssh/sshd_config && \
     wget https://github.com/novnc/websockify/raw/master/websockify/websocket.py && \
     wget https://github.com/chantzish/python-dewebsockify/raw/master/dewebsockify.py && \
-    wget -O- https://telegram.org/dl/desktop/linux32 | sudo tar xJ -C /opt/ && \
+    wget -O- https://telegram.org/dl/desktop/linux | sudo tar xJ -C /opt/ && \
     sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && \
     sudo chown -R user:user /opt && \
     sudo chmod 755 -R /opt && \
