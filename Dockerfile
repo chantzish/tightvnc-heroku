@@ -130,6 +130,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && \
     sudo chown -R user:user /opt && \
     sudo chmod 755 -R /opt && \
+    heroku version && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
