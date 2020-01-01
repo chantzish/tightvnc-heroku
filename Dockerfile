@@ -139,6 +139,8 @@ RUN echo 1234 | sudo -S apt update && \
     sudo chmod +x /usr/local/sbin/gdrive && \
     mkdir .gdrive && \
     git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git && \
+    cd linux && \
+    git checkout -b v4.18 v4.18 && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
