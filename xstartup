@@ -1,0 +1,13 @@
+#!/bin/sh
+
+export HOME=/home/user
+export USER=`whoami`
+export LANG=en_IL
+#xsetroot -solid grey
+#x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
+#x-window-manager &
+# Fix to make GNOME work
+#export XKL_XMODMAP_DISABLE=1
+#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/
+/usr/bin/lxsession -s Lubuntu &
+vncconfig -nowin &
