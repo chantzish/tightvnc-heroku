@@ -102,6 +102,7 @@ RUN echo 1234 | sudo -S apt update && \
         libssl-dev libffi-dev python-dev python3-dev ncurses-dev python-pip python3-pip virtualenv \
         #openjdk-8-jdk \
         fonts-liberation libappindicator1 \
+        qemu-user-static \
         debootstrap \
         schroot \
         cgroup-tools && \
