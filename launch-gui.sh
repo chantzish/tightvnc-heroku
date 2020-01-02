@@ -10,7 +10,7 @@ echo '#!/bin/sh\n\nwhile :; do wget '$APP_NAME'.herokuapp.com -q -O /dev/null -o
 chmod +x /usr/local/sbin/stop.sh
 
 #mkdir -m 1777 /tmp/.X11-unix
-mkdir .vnc
+#mkdir .vnc
 printf "%s" "$VNC_PASS" | vncpasswd -f > /home/user/.vnc/passwd
 printf "%s\n" "$HEROKU_LOGIN" > .netrc
 printf "%s" "$IDENTITY" > .ssh/id_rsa
