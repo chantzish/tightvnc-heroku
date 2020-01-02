@@ -54,6 +54,7 @@ RUN echo 1234 | sudo -S apt update && \
         xz-utils \
         libelf-dev \
         bc \
+        device-tree-compiler \
         vim-tiny \
         net-tools \
         git \
