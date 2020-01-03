@@ -142,9 +142,9 @@ RUN echo 1234 | sudo -S apt update && \
     mkdir .gdrive && \
     git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git && \
     cd linux && git checkout -b v4.18 v4.18 && cd .. && \
-    sudo qemu-debootstrap --arch=arm64 --include="sudo,file,openssh-server" --exclude="debfoster" stretch ./debian-stretch-arm64 http://deb.debian.org/debian && \
-    sudo qemu-debootstrap --arch=armhf --include="sudo,file,openssh-server" --exclude="debfoster" stretch ./debian-stretch-armhf http://deb.debian.org/debian && \
-    sudo qemu-debootstrap --arch=armel --include="sudo,file,openssh-server" --exclude="debfoster" stretch ./debian-stretch-armel http://deb.debian.org/debian && \
+    #sudo qemu-debootstrap --arch=arm64 --include="sudo,file,openssh-server" --exclude="debfoster" stretch ./debian-stretch-arm64 http://deb.debian.org/debian && \
+    #sudo qemu-debootstrap --arch=armhf --include="sudo,file,openssh-server" --exclude="debfoster" stretch ./debian-stretch-armhf http://deb.debian.org/debian && \
+    #sudo qemu-debootstrap --arch=armel --include="sudo,file,openssh-server" --exclude="debfoster" stretch ./debian-stretch-armel http://deb.debian.org/debian && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
