@@ -23,8 +23,8 @@ git config --global credential.helper store
 printf "%s\n" "$GIT_CREDENTIALS" > .git-credentials
 
 vncserver -geometry 1536x754 :1
-gdrive download `gdrive list -m 200 | grep vmlinuz-4.9.0-11-armmp-lpae | awk '{print $1}'`
-gdrive download `gdrive list -m 200 | grep initrd.img-4.9.0-11-armmp-lpae | awk '{print $1}'`
+gdrive download `gdrive list -m 200 | grep vmlinuz | awk '{print $1}'`
+gdrive download `gdrive list -m 200 | grep initrd | awk '{print $1}'`
 gdrive download `gdrive list -m 200 | grep arm.qcow2 | awk '{print $1}'`
 qemu-system-arm -M virt -m 512M -kernel vmlinuz-4.9.0-11-armmp-lpae -initrd initrd.img-4.9.0-11-armmp-lpae -append root=/dev/vda2 -drive if=none,file=arm.qcow2,format=qcow2,id=hd -device virtio-blk-device,drive=hd -netdev user,hostfwd=tcp:0.0.0.0:2201-:22,id=mynet -device virtio-net-device,netdev=mynet -serial mon:telnet:0.0.0.0:2300,server,nowait -vga none -display none -daemonize
 /opt/noVNC/utils/websockify/run 8081 localhost:2201 --heartbeat=45 &
