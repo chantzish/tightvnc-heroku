@@ -51,6 +51,7 @@ RUN echo 1234 | sudo -S apt update && \
         ncurses-dev \
         libssl-dev \
         fakeroot \
+        fakechroot \
         xz-utils \
         libelf-dev \
         bc \
