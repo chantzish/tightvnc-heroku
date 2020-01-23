@@ -140,6 +140,9 @@ RUN echo 1234 | sudo -S apt update && \
     sudo wget "https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64" -O /usr/local/sbin/gdrive && \
     sudo chmod +x /usr/local/sbin/gdrive && \
     mkdir .gdrive && \
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
+    sudo apt-get install -y nodejs && \
+    git clone https://github.com/chantzish/dewebsockify.git && \
     git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git && \
     cd linux && git checkout -b v4.18 v4.18 && cd .. && \
     #sudo qemu-debootstrap --arch=arm64 --include="sudo,file,openssh-server" --exclude="debfoster" stretch ./debian-stretch-arm64 http://deb.debian.org/debian && \
