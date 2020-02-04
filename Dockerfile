@@ -100,6 +100,7 @@ RUN echo 1234 | sudo -S apt update && \
         g++-arm-linux-gnueabihf \
         tint2 \
         ffmpeg \
+        expect-dev \
         #default-jdk \
         libssl-dev libffi-dev python-dev python3-dev ncurses-dev python-pip python3-pip virtualenv \
         #openjdk-8-jdk \
