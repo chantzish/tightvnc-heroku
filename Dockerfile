@@ -99,7 +99,7 @@ RUN echo 1234 | sudo -S apt update && \
         expect-dev \
         #default-jdk \
         libssl-dev libffi-dev python-dev python3-dev ncurses-dev python-pip python3-pip virtualenv \
-        #openjdk-8-jdk \
+        openjdk-8-jdk \
         fonts-liberation libappindicator1 \
         qemu-user-static \
         debootstrap \
@@ -124,7 +124,7 @@ RUN echo 1234 | sudo -S apt update && \
     #sudo rm /etc/xdg/autostart/lxpolkit.desktop && \
     #sudo mv /usr/bin/lxpolkit /usr/bin/lxpolkit.ORIG && \
     #echo "NotShowIn=GNOME;Unity;LXDE;" | sudo tee -a /etc/xdg/autostart/light-locker.desktop && \
-    #sudo sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties
+    sudo sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties
     sudo sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-bluetooth-discover/#load-module module-bluetooth-discover/' /etc/pulse/default.pa && \
     echo KexAlgorithms +diffie-hellman-group1-sha1 | sudo tee -a /etc/ssh/sshd_config && \
@@ -178,6 +178,11 @@ RUN echo 1234 | sudo -S apt update && \
     repo init -u https://android.googlesource.com/platform/manifest -b android-9.0.0_r3 && \
     repo sync && \
     cd .. && \
+    mkdir studio-master-dev && \
+    cd studio-master-dev && \
+    repo init -u https://android.googlesource.com/platform/manifest -b studio-master-dev && \
+    repo sync && \
+    cd ..  && \
     wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && \
     chmod +x winetricks && \
     sudo rm /var/lib/dpkg/statoverride
