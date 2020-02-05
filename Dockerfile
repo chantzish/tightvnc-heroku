@@ -16,7 +16,11 @@ RUN echo 1234 | sudo -S apt update && \
     sudo ln -snf /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
     sudo dpkg-reconfigure --frontend=noninteractive keyboard-configuration tzdata && \
     sudo dpkg --add-architecture i386 && \
+    wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
+    sudo apt-key add winehq.key && \
+    sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' && \
     sudo apt update && \
+    sudo apt install -y --install-recommends winehq-stable && \
     sudo apt install -y \
         libc6:i386 \
         libstdc++6:i386 \
@@ -55,7 +59,6 @@ RUN echo 1234 | sudo -S apt update && \
         xz-utils \
         libelf-dev \
         bc \
-        device-tree-compiler \
         vim-tiny \
         net-tools \
         git \
@@ -89,15 +92,6 @@ RUN echo 1234 | sudo -S apt update && \
         evince \
         lubuntu-core \
         golang-go \
-        binutils-aarch64-linux-gnu \
-        gcc-aarch64-linux-gnu \
-        g++-aarch64-linux-gnu \
-        binutils-arm-linux-gnueabi \
-        gcc-arm-linux-gnueabi \
-        g++-arm-linux-gnueabi \
-        binutils-arm-linux-gnueabihf \
-        gcc-arm-linux-gnueabihf \
-        g++-arm-linux-gnueabihf \
         tint2 \
         ffmpeg \
         expect-dev \
@@ -108,6 +102,11 @@ RUN echo 1234 | sudo -S apt update && \
         qemu-user-static \
         debootstrap \
         schroot \
+        ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 \
+        g++-multilib python-networkx libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev \
+        squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen \
+        libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 \
+        lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip \
         cgroup-tools && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
@@ -144,6 +143,26 @@ RUN echo 1234 | sudo -S apt update && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     sudo apt-get install -y nodejs && \
     git clone https://github.com/chantzish/dewebsockify.git && \
+    git clone --depth=1 https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b cactus-p-oss cactus-p-oss && \
+    cd cactus-p-oss && \
+    git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 toolchain && \
+    cd toolchain && \
+    git checkout d8df6b5a187d49fce217569ad493cdb8554afc4e -b toolchain && \
+    cd .. && \
+    mkdir out && \
+    export ARCH=arm && \
+    export SUBARCH=arm && \
+    export CROSS_COMPILE=${PWD}/toolchain/bin/arm-linux-androideabi- && \
+    export DTC_EXT=dtc && \
+    sed -i 's:CONFIG_BUILD_ARM_DTB_OVERLAY_IMAGE_NAMES="cereus":CONFIG_BUILD_ARM_DTB_OVERLAY_IMAGE=y\nCONFIG_BUILD_ARM_DTB_OVERLAY_IMAGE_NAMES="cereus":' arch/arm/configs/cereus_defconfig && \
+    make O=out cereus_defconfig && \
+    make -j$(nproc) O=out 2>&1 | tee kernel.log && \
+    cd .. && \
+    mkdir dummy && cd dummy && \
+    wget https://github.com/giometti/linux_device_driver_development_cookbook/raw/master/chapter_02/module/Makefile && \
+    wget https://github.com/giometti/linux_device_driver_development_cookbook/raw/master/chapter_02/module/dummy-code.c && \
+    sed -i 's/ARCH ?= arm64\nCROSS_COMPILE ?= aarch64-linux-gnu/ARCH ?= arm/' Makefile && \
+    Make KERNEL_DIR=cactus-p-oss O=../cactus-p-oss/out && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
