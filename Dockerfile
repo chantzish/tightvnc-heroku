@@ -4,7 +4,7 @@ USER user
 WORKDIR /home/user
 ENV LANG=en_IL
 RUN echo 1234 | sudo -S apt update && \
-    sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg && \
+    sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg  software-properties-common && \
     echo "deb https://cli-assets.heroku.com/apt ./" | sudo tee /etc/apt/sources.list.d/heroku.list && \
     curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
     sudo locale-gen en_IL en_US.UTF-8 && \
