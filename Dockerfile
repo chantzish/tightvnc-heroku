@@ -4,6 +4,8 @@ USER user
 WORKDIR /home/user
 ENV LANG=en_IL
 RUN echo 1234 | sudo -S apt update && \
+    printf "%s" "$GIT_CONF" > .gitconfig && \
+    env && \
     sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg  software-properties-common && \
     echo "deb https://cli-assets.heroku.com/apt ./" | sudo tee /etc/apt/sources.list.d/heroku.list && \
     curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
@@ -175,9 +177,6 @@ RUN echo 1234 | sudo -S apt update && \
     sudo curl https://storage.googleapis.com/git-repo-downloads/repo -o /bin/repo && \
     sudo chmod a+x /bin/repo && \
     mkdir aosp && cd aosp && \
-    printf "%s" "$GIT_CONF" | tee .gitconfig && \
-    nproc && \
-    nproc --all && \
     repo init -u https://android.googlesource.com/platform/manifest -b android-9.0.0_r3 && \
     repo sync -c && \
     cd .. && \
