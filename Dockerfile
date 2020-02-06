@@ -175,7 +175,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo curl https://storage.googleapis.com/git-repo-downloads/repo -o /bin/repo && \
     sudo chmod a+x /bin/repo && \
     mkdir aosp && cd aosp && \
-    printf "%s" "$GIT_CONFIG" > .gitconfig && \
+    printf "%s" "$GIT_CONF" | tee .gitconfig && \
     repo init -u https://android.googlesource.com/platform/manifest -b android-9.0.0_r3 && \
     repo sync && \
     cd .. && \
