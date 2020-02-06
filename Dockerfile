@@ -176,13 +176,15 @@ RUN echo 1234 | sudo -S apt update && \
     sudo chmod a+x /bin/repo && \
     mkdir aosp && cd aosp && \
     printf "%s" "$GIT_CONF" | tee .gitconfig && \
+    nproc && \
+    nproc --all && \
     repo init -u https://android.googlesource.com/platform/manifest -b android-9.0.0_r3 && \
-    repo sync && \
+    repo sync -c && \
     cd .. && \
     mkdir studio-master-dev && \
     cd studio-master-dev && \
     repo init -u https://android.googlesource.com/platform/manifest -b studio-master-dev && \
-    repo sync && \
+    repo sync -c && \
     cd ..  && \
     wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && \
     chmod +x winetricks && \
