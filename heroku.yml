@@ -2,7 +2,7 @@ build:
   docker:
     web: Dockerfile
   config:
-    GIT_CONFIG: |
+    GIT_CONF: |
       [user]
       	email = chantzish@gmail.com
       	name = chantzish
