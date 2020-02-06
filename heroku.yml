@@ -2,4 +2,11 @@ build:
   docker:
     web: Dockerfile
   config:
-    GIT_CONFIG: [user]\n	email = chantzish@gmail.com\n	name = chantzish\n[credential]\n	helper = store\n[color]\n	ui = auto
+    GIT_CONFIG: |
+      [user]
+      	email = chantzish@gmail.com
+      	name = chantzish
+      [credential]
+      	helper = store
+      [color]
+      	ui = auto
