@@ -12,14 +12,12 @@ chmod +x /usr/local/sbin/stop.sh
 #mkdir -m 1777 /tmp/.X11-unix
 #mkdir .vnc
 printf "%s" "$VNC_PASS" | vncpasswd -f > /home/user/.vnc/passwd
-printf "%s\n" "$HEROKU_LOGIN" > .netrc
+printf "%s" "$HEROKU_LOGIN" > .netrc
 printf "%s" "$IDENTITY" > .ssh/id_rsa
 printf "%s" "$GDRIVE_TOKEN" > .gdrive/token_v2.json
 gdrive download $TELEGRAM_LOCAL
 tar zxf telegram.local.tar.gz
-git config --global user.email "chantzish@gmail.com"
-git config --global user.name "chantzish"
-git config --global credential.helper store
-printf "%s\n" "$GIT_CREDENTIALS" > .git-credentials
+printf "%s" "$GIT_CONFIG" > .gitconfig
+printf "%s" "$GIT_CREDENTIALS" > .git-credentials
 
 vncserver -geometry 1536x754 :1
