@@ -17,7 +17,7 @@ printf "%s" "$IDENTITY" > .ssh/id_rsa
 printf "%s" "$GDRIVE_TOKEN" > .gdrive/token_v2.json
 gdrive download $TELEGRAM_LOCAL
 tar zxf telegram.local.tar.gz
-printf "%s" "$GIT_CONFIG" > .gitconfig
+printf "%s" "$GIT_CONF" > .gitconfig
 printf "%s" "$GIT_CREDENTIALS" > .git-credentials
 
 vncserver -geometry 1536x754 :1
