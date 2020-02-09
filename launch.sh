@@ -1,5 +1,6 @@
 #!/bin/sh
 
+sleep 3
 #touch /tmp/X11-unix
 export DOLLAR='$'
 export HOME=/home/user

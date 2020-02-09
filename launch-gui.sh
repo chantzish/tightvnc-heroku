@@ -1,5 +1,6 @@
 #!/bin/sh
 
+sleep 3
 export HOME=/home/user
 export USER=`whoami`
 export LANG=en_IL
