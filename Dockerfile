@@ -144,7 +144,7 @@ RUN echo 1234 | sudo -S apt update && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     sudo apt-get install -y nodejs && \
     git clone https://github.com/chantzish/dewebsockify.git && \
-    sudo bash -c -O extglob "chown -R `id -un`:`id -gn` /"'!(dev|etc|proc|sys|tmp|usr) /etc/!(bash.bashrc|group|hostname|hosts|passwd|profile|resolv.conf) /usr/!(bin|lib) /usr/bin/!(sudo) /usr/lib/!(sudo) && chown '"`id -un`:`id -gn` / /tmp /etc" && \
+    sudo bash -c -O extglob "chown -R `id -un`:`id -gn` /"'!(dev|etc|proc|sys|tmp|usr) /etc/!(bash.bashrc|group|hostname|hosts|passwd|profile|resolv.conf|sudoers) /usr/!(bin|lib) /usr/bin/!(sudo) /usr/lib/!(sudo) && chown '"`id -un`:`id -gn` / /tmp /etc" && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
