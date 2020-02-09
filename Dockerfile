@@ -159,5 +159,5 @@ COPY nginx.template /home/user/nginx.template
 COPY launch.sh /home/user/launch.sh
 COPY launch-gui.sh /home/user/launch-gui.sh
 COPY Dockerfile /home/user/Dockerfile
-EXPOSE 8080/tcp 
+EXPOSE 8000/tcp 
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
