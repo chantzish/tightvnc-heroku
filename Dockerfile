@@ -1,6 +1,6 @@
 FROM ubuntu
 RUN apt update && apt install -y sudo && useradd -u 1000 -U -G root,adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
-USER user
+USER 1000
 WORKDIR /home/user
 ENV LANG=en_IL
 RUN echo 1234 | sudo -S apt update && \
