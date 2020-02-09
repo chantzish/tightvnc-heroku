@@ -1,19 +1,5 @@
 #!/bin/sh
 
-env
-
-if ! whoami &> /dev/null; then
-  if [ -w /etc/passwd ]; then
-    echo "${USER_NAME:-user}:x:$(id -u):$(id -g)::${HOME:-/home/user}:/bin/sh" >> /etc/passwd
-  fi
-fi
-
-if ! groups &> /dev/null; then
-  if [ -w /etc/group ]; then
-    echo "${GROUP_NAME:-user}:x:$(id -u):" >> /etc/group
-  fi
-fi
-
 export HOME=/home/user
 export USER=`whoami`
 export LANG=en_IL

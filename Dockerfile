@@ -162,4 +162,4 @@ COPY launch.sh /home/user/launch.sh
 COPY launch-gui.sh /home/user/launch-gui.sh
 COPY Dockerfile /home/user/Dockerfile
 EXPOSE 8000/tcp 
-CMD /home/user/launch-gui.sh & /home/user/launch.sh 
+CMD /home/user/fix.sh && /home/user/launch-gui.sh & /home/user/launch.sh 
