@@ -8,6 +8,12 @@ if ! whoami &> /dev/null; then
   fi
 fi
 
+if ! groups &> /dev/null; then
+  if [ -w /etc/group ]; then
+    echo "${GROUP_NAME:-user}:x:$(id -u):" >> /etc/group
+  fi
+fi
+
 export HOME=/home/user
 export USER=`whoami`
 export LANG=en_IL
