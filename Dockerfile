@@ -131,23 +131,28 @@ RUN echo 1234 | sudo -S apt update && \
     echo "#MACs +hmac-sha1" | sudo tee -a /etc/ssh/sshd_config && \
     echo Ciphers +aes128-cbc | sudo tee -a /etc/ssh/sshd_config && \
     sudo sed -i 's/#Port 22/Port 2200/' /etc/ssh/sshd_config && \
+    echo wget https://github.com/novnc/websockify/raw/master/websockify/websocket.py && \
     wget https://github.com/novnc/websockify/raw/master/websockify/websocket.py && \
+    echo wget https://github.com/chantzish/python-dewebsockify/raw/master/dewebsockify.py && \
     wget https://github.com/chantzish/python-dewebsockify/raw/master/dewebsockify.py && \
+    echo wget -O- https://telegram.org/dl/desktop/linux \| sudo tar xJ -C /opt/ && \
     wget -O- https://telegram.org/dl/desktop/linux | sudo tar xJ -C /opt/ && \
     sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && \
     sudo chown -R user:user /opt && \
     sudo chmod 755 -R /opt && \
     heroku version && \
+    echo sudo wget "https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64" -O /usr/local/sbin/gdrive && \
     sudo wget "https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64" -O /usr/local/sbin/gdrive && \
     sudo chmod +x /usr/local/sbin/gdrive && \
     mkdir .gdrive && \
+    echo curl -sL https://deb.nodesource.com/setup_12.x \| sudo -E bash - && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     sudo apt-get install -y nodejs && \
     git clone https://github.com/chantzish/dewebsockify.git && \
     #sudo bash -c -O extglob "chown -R `id -un`:`id -gn` /"'!(dev|etc|proc|run|sys|tmp|usr) /etc/!(bash.bashrc|group|hostname|hosts|passwd|profile|resolv.conf|sudoers|sudoers.d) /run/!(sudo) /usr/!(bin|lib) /usr/bin/!(sudo) /usr/lib/!(sudo) && chown '"`id -un`:`id -gn` / /tmp /etc /usr /run /usr/bin /usr/lib" && \
     echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
-    echo 1234 | sudo -S bash -c -O extglob 'chgrp -R 0 /!(sys|etc) /etc/!(resolv.conf) && chgrp 0 /' && \
-    echo 1234 | sudo -S bash -c -O extglob 'chmod -R g=u /!(sys|etc) /etc/!(resolv.conf) && chmod g=u /'
+    echo 1234 | sudo -S bash -c -O extglob 'chgrp -R 0 /!(sys|proc|etc) /etc/!(resolv.conf) && chgrp 0 /' && \
+    echo 1234 | sudo -S bash -c -O extglob 'chmod -R g=u /!(sys|proc|etc) /etc/!(resolv.conf) && chmod g=u /'
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
 COPY nginx.template /home/user/nginx.template
