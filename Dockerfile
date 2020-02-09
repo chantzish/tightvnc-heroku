@@ -146,8 +146,8 @@ RUN echo 1234 | sudo -S apt update && \
     git clone https://github.com/chantzish/dewebsockify.git && \
     #sudo bash -c -O extglob "chown -R `id -un`:`id -gn` /"'!(dev|etc|proc|run|sys|tmp|usr) /etc/!(bash.bashrc|group|hostname|hosts|passwd|profile|resolv.conf|sudoers|sudoers.d) /run/!(sudo) /usr/!(bin|lib) /usr/bin/!(sudo) /usr/lib/!(sudo) && chown '"`id -un`:`id -gn` / /tmp /etc /usr /run /usr/bin /usr/lib" && \
     echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
-    echo 1234 | sudo -S chgrp -R 0 / && \
-    echo 1234 | sudo -S chmod -R g=u /
+    echo 1234 | sudo -S bash -c -O extglob 'chgrp -R 0 /!(sys|etc) /etc/!(resolv.conf) && chgrp 0 /' && \
+    echo 1234 | sudo -S bash -c -O extglob 'chmod -R g=u /!(sys|etc) /etc/!(resolv.conf) && chmod g=u /'
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
 COPY nginx.template /home/user/nginx.template
