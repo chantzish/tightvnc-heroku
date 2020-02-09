@@ -160,6 +160,7 @@ COPY xstartup /home/user/.vnc/xstartup
 COPY nginx.template /home/user/nginx.template
 COPY launch.sh /home/user/launch.sh
 COPY launch-gui.sh /home/user/launch-gui.sh
+COPY fix.sh /home/user/fix.sh
 COPY Dockerfile /home/user/Dockerfile
 EXPOSE 8000/tcp 
 CMD /home/user/fix.sh && /home/user/launch-gui.sh & /home/user/launch.sh 
