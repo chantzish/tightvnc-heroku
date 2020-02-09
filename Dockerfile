@@ -2,6 +2,8 @@ FROM ubuntu
 RUN apt update && apt install -y sudo && useradd -u 1000 -U -G root,adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
 USER 1000
 WORKDIR /home/user
+ENV HOME=/home/user
+ENV USER=user
 ENV LANG=en_IL
 RUN echo 1234 | sudo -S apt update && \
     sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl gnupg && \
