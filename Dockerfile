@@ -1,5 +1,5 @@
 FROM ubuntu
-RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
+RUN apt update && apt install -y sudo && useradd -u 1000 -U -G root,adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
 USER user
 WORKDIR /home/user
 ENV LANG=en_IL
@@ -144,8 +144,10 @@ RUN echo 1234 | sudo -S apt update && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     sudo apt-get install -y nodejs && \
     git clone https://github.com/chantzish/dewebsockify.git && \
-    sudo bash -c -O extglob "chown -R `id -un`:`id -gn` /"'!(dev|etc|proc|run|sys|tmp|usr) /etc/!(bash.bashrc|group|hostname|hosts|passwd|profile|resolv.conf|sudoers|sudoers.d) /run/!(sudo) /usr/!(bin|lib) /usr/bin/!(sudo) /usr/lib/!(sudo) && chown '"`id -un`:`id -gn` / /tmp /etc /usr /run /usr/bin /usr/lib" && \
-    echo 1234 | sudo -S rm /var/lib/dpkg/statoverride
+    #sudo bash -c -O extglob "chown -R `id -un`:`id -gn` /"'!(dev|etc|proc|run|sys|tmp|usr) /etc/!(bash.bashrc|group|hostname|hosts|passwd|profile|resolv.conf|sudoers|sudoers.d) /run/!(sudo) /usr/!(bin|lib) /usr/bin/!(sudo) /usr/lib/!(sudo) && chown '"`id -un`:`id -gn` / /tmp /etc /usr /run /usr/bin /usr/lib" && \
+    echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
+    echo 1234 | sudo -S chgrp -R 0 / && \
+    echo 1234 | sudo -S chmod -R g=u /
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
 COPY nginx.template /home/user/nginx.template
