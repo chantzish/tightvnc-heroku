@@ -18,44 +18,12 @@ RUN echo 1234 | sudo -S apt update && \
     sudo dpkg --add-architecture i386 && \
     sudo apt update && \
     sudo apt install -y \
-        libc6:i386 \
-        libstdc++6:i386 \
-        libssl1.0.0:i386 \
-        libx11-6:i386 \
-        libncurses5:i386 \
-        zlib1g:i386 \
-        libgtk2.0-0:i386 \
-        libsdl1.2debian:i386 \
-        libgtk-3-0:i386 \
-        heroku \
-#???????
-        bzip2 \
-        libbz2-1.0 \
-        libbz2-1.0:i386 \
-        libdb5.3:i386 \
-        libexpat1:i386 \
-        libffi6:i386 \
-        libgpm2:i386 \
-        libncursesw5:i386 \
-        libpython-stdlib:i386 \
-        libpython2.7-minimal:i386 \
-        libpython2.7-stdlib:i386 && \
-    sudo apt install -y \
         curl \
         binutils \
         build-essential \
         autoconf \
-#kernel compilation
-        bison \
-        flex \
-        ncurses-dev \
-        libssl-dev \
         fakeroot \
-        fakechroot \
         xz-utils \
-        libelf-dev \
-        bc \
-        device-tree-compiler \
         vim-tiny \
         net-tools \
         git \
@@ -64,18 +32,15 @@ RUN echo 1234 | sudo -S apt update && \
         python \
         python-numpy \
         nginx \
-        #xserver-xorg-video-dummy \
-        #x11vnc \
-        tigervnc-standalone-server vlc megatools \
+        tigervnc-standalone-server \
+        megatools \
         less \
-        socat \
-        vde2 \
-        qemu \
         zip \
         unzip \
         openssh-server \
         p7zip-rar \
         p7zip-full \
+        #xrandr is in x11-xserver-utils
         x11-xserver-utils \
         xdotool \
         x11-apps \
@@ -88,27 +53,13 @@ RUN echo 1234 | sudo -S apt update && \
         transmission \
         evince \
         lubuntu-core \
-        golang-go \
-        binutils-aarch64-linux-gnu \
-        gcc-aarch64-linux-gnu \
-        g++-aarch64-linux-gnu \
-        binutils-arm-linux-gnueabi \
-        gcc-arm-linux-gnueabi \
-        g++-arm-linux-gnueabi \
-        binutils-arm-linux-gnueabihf \
-        gcc-arm-linux-gnueabihf \
-        g++-arm-linux-gnueabihf \
-        tint2 \
         ffmpeg \
-        expect-dev \
         #default-jdk \
-        libssl-dev libffi-dev python-dev python3-dev ncurses-dev python-pip python3-pip virtualenv \
+        libssl-dev libffi-dev python-dev python3-dev ncurses-dev python-pip python3-pip virtualenv python3-venv \
         #openjdk-8-jdk \
         fonts-liberation libappindicator1 \
-        qemu-user-static \
-        debootstrap \
-        schroot \
-        cgroup-tools && \
+        heroku \
+        guacamole && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
     chmod 700 ~/.ssh && \
