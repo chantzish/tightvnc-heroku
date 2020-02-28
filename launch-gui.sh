@@ -3,6 +3,7 @@
 export HOME=/home/user
 export USER=`whoami`
 export LANG=en_IL
+export PATH=/usr/games:$PATH
 #export JAVA_HOME=/usr/lib/jvm/default-java
 
 # fix according to site
