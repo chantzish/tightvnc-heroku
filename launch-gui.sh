@@ -13,8 +13,15 @@ chmod +x /usr/local/sbin/stop.sh
 #mkdir -m 1777 /tmp/.X11-unix
 #mkdir .vnc
 printf "%s" "$VNC_PASS" | vncpasswd -f > /home/user/.vnc/passwd
-printf "%s\n" "$HEROKU_LOGIN" > .netrc
+printf "%s" "$HEROKU_LOGIN" > .netrc
 printf "%s" "$IDENTITY" > .ssh/id_rsa
+cd gdrive
+sed -i 's/const ClientId = ".*.apps.googleusercontent.com"/const ClientId = "'"$GDRIVE_CLIENT_ID"'"/' handlers_drive.go
+sed -i 's/const ClientSecret = ".*"/const ClientSecret = "'"$GDRIVE_CLIENT_SECRET"'"/' handlers_drive.go
+#go get github.com/prasmussen/gdrive
+go build
+cp gdrive /usr/local/sbin/gdrive
+cd ..
 printf "%s" "$GDRIVE_TOKEN" > .gdrive/token_v2.json
 gdrive download $TELEGRAM_LOCAL
 tar zxf telegram.local.tar.gz
