@@ -41,4 +41,8 @@ sed -i 's/if \[ `id -u` -ne 0 \]/if false \&\& \[ `id -u` -ne 0 \]/' /etc/init.d
 sed -i 's/su $TOMCAT8_USER -s //' /etc/init.d/tomcat8
 sed -i 's/usermod/#usermod/' /etc/init.d/tomcat8
 sed -i 's/install -o $TOMCAT8_USER -g adm/install -o $TOMCAT8_USER -g '"`id -gn`"'/' /etc/init.d/tomcat8
+#/etc/init.d/tomcat8 restart
 service tomcat8 start
+sed -i 's/guacd:guacd/'"`whoami`:`id -gn`"'/' /etc/init.d/guacd
+#/etc/init.d/guacd start
+service guacd start
