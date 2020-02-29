@@ -32,3 +32,13 @@ git config --global color.ui auto
 printf "%s\n" "$GIT_CREDENTIALS" > .git-credentials
 
 vncserver -geometry 1536x754 :1
+
+sed -i 's/TOMCAT8_GROUP=tomcat8/TOMCAT8_GROUP='"`id -Gn`"'/' /etc/default/tomcat8
+sed -i 's/TOMCAT8_GROUP=tomcat8/TOMCAT8_GROUP='"`id -Gn`"'/' /etc/init.d/tomcat8
+sed -i 's/TOMCAT8_USER=tomcat8/TOMCAT8_USER='"`whoami`"'/' /etc/default/tomcat8
+sed -i 's/TOMCAT8_USER=tomcat8/TOMCAT8_USER='"`whoami`"'/' /etc/init.d/tomcat8
+sed -i 's/if \[ `id -u` -ne 0 \]/if false \&\& \[ `id -u` -ne 0 \]/' /etc/init.d/tomcat8
+sed -i 's/su $TOMCAT8_USER -s //' /etc/init.d/tomcat8
+sed -i 's/usermod/#usermod/' /etc/init.d/tomcat8
+sed -i 's/install -o $TOMCAT8_USER -g adm/install -o $TOMCAT8_USER -g '"`id -Gn`"'/' /etc/init.d/tomcat8
+service tomcat8 start
