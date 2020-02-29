@@ -25,9 +25,10 @@ cd ..
 printf "%s" "$GDRIVE_TOKEN" > .gdrive/token_v2.json
 gdrive download $TELEGRAM_LOCAL
 tar zxf telegram.local.tar.gz
-git config --global user.email "chantzish@gmail.com"
-git config --global user.name "chantzish"
+git config --global user.email "$GIT_EMAIL"
+git config --global user.name "$GIT_NAME"
 git config --global credential.helper store
+git config --global color.ui auto
 printf "%s\n" "$GIT_CREDENTIALS" > .git-credentials
 
 vncserver -geometry 1536x754 :1
