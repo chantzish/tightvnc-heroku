@@ -74,6 +74,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo sed -i 's:JDK_DIRS="/usr/lib/jvm/default-java":JDK_DIRS="/usr/lib/jvm/java-8-openjdk-amd64":' /etc/init.d/tomcat8 && \
     sudo rm /var/lib/tomcat8/conf/Catalina/localhost/guacamole.xml && \
     sudo mv guacamole-0.9.9.war /var/lib/tomcat8/webapps/guacamole.war && \
+    sudo sed -i 's:#!/bin/sh:#!/bin/sh\n\nCATALINA_OPTS="-Xms64m -Xmx256m":' /usr/share/tomcat8/bin/catalina.sh && \
     #sudo /etc/init.d/tomcat8 start && \
     #sleep 30s && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
