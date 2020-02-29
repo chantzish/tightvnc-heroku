@@ -89,7 +89,8 @@ RUN echo 1234 | sudo -S apt update && \
     echo 1234 | sudo -S rm /etc/xdg/autostart/update-notifier.desktop && \
     #sudo rm /etc/xdg/autostart/lxpolkit.desktop && \
     #sudo mv /usr/bin/lxpolkit /usr/bin/lxpolkit.ORIG && \
-    #echo "NotShowIn=GNOME;Unity;LXDE;" | sudo tee -a /etc/xdg/autostart/light-locker.desktop && \    sudo sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
+    #echo "NotShowIn=GNOME;Unity;LXDE;" | sudo tee -a /etc/xdg/autostart/light-locker.desktop && \
+    sudo sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-detect/#load-module module-detect/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-bluetooth-discover/#load-module module-bluetooth-discover/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-bluetooth-policy/#load-module module-bluetooth-policy/' /etc/pulse/default.pa && \
