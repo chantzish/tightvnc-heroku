@@ -74,8 +74,8 @@ RUN echo 1234 | sudo -S apt update && \
     sudo sed -i 's:JDK_DIRS="/usr/lib/jvm/default-java":JDK_DIRS="/usr/lib/jvm/java-8-openjdk-amd64":' /etc/init.d/tomcat8 && \
     sudo rm /var/lib/tomcat8/conf/Catalina/localhost/guacamole.xml && \
     sudo mv guacamole-0.9.9.war /var/lib/tomcat8/webapps/guacamole.war && \
-    sudo /etc/init.d/tomcat8 start && \
-    sleep 30s && \
+    #sudo /etc/init.d/tomcat8 start && \
+    #sleep 30s && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
     chmod 700 ~/.ssh && \
@@ -109,7 +109,7 @@ RUN echo 1234 | sudo -S apt update && \
     git clone https://github.com/gdrive-org/gdrive.git && \
     mkdir .gdrive && \
     git clone https://github.com/chantzish/dewebsockify.git && \
-    sudo /etc/init.d/tomcat8 stop && \
+    #sudo /etc/init.d/tomcat8 stop && \
     sudo rm /etc/dpkg/dpkg.cfg.d/excludes && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
