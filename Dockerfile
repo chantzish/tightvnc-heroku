@@ -4,7 +4,7 @@ USER user
 WORKDIR /home/user
 ENV LANG=en_IL
 RUN echo 1234 | sudo -S apt update && \
-    sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl gnupg && \
+    sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl gnupg software-properties-common && \
     echo "deb https://cli-assets.heroku.com/apt ./" | sudo tee /etc/apt/sources.list.d/heroku.list && \
     curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
     sudo locale-gen en_IL en_US.UTF-8 && \
@@ -17,8 +17,8 @@ RUN echo 1234 | sudo -S apt update && \
     sudo dpkg-reconfigure --frontend=noninteractive keyboard-configuration tzdata && \
     sudo dpkg --add-architecture i386 && \
     sudo apt update && \
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     sudo apt install -y \
-        curl \
         binutils \
         build-essential \
         autoconf \
@@ -59,6 +59,8 @@ RUN echo 1234 | sudo -S apt update && \
         #openjdk-8-jdk \
         fonts-liberation libappindicator1 \
         heroku \
+        golang-go \
+        nodejs \
         guacamole && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
@@ -92,12 +94,10 @@ RUN echo 1234 | sudo -S apt update && \
     sudo chown -R user:user /opt && \
     sudo chmod 755 -R /opt && \
     heroku version && \
-    sudo wget "https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64" -O /usr/local/sbin/gdrive && \
-    sudo chmod +x /usr/local/sbin/gdrive && \
+    git clone https://github.com/gdrive-org/gdrive.git && \
     mkdir .gdrive && \
-    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
-    sudo apt-get install -y nodejs && \
     git clone https://github.com/chantzish/dewebsockify.git && \
+    sudo rm /etc/dpkg/dpkg.cfg.d/excludes && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
