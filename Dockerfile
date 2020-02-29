@@ -17,6 +17,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo dpkg-reconfigure --frontend=noninteractive keyboard-configuration tzdata && \
     sudo dpkg --add-architecture i386 && \
     sudo apt update && \
+    echo guacamole guacamole-tomcat/restart-server boolean true | sudo debconf-set-selections && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     sudo apt install -y \
         binutils \
@@ -61,6 +62,8 @@ RUN echo 1234 | sudo -S apt update && \
         heroku \
         golang-go \
         nodejs \
+        # for debconf-get-selections
+        debconf-utils \
         guacamole && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
