@@ -44,7 +44,7 @@ sed -i 's/install -o $TOMCAT8_USER -g adm/install -o $TOMCAT8_USER -g '"`id -gn`
 #/etc/init.d/tomcat8 restart
 sed -i 's:</tomcat-users>:\n<role rolename="manager-gui" />\n<user username="'"$VNC_USER"'" password="'"$VNC_PASS"'" roles="manager-gui" />\n</tomcat-users>:' /var/lib/tomcat8/conf/tomcat-users.xml
 service tomcat8 start
-sed -i 's:</user-mapping>:\n    <authorize username="'"$VNC_USER"'" password="'"$VNC_PASS"'">\n        <protocol>vnc</protocol>\n        <param name="hostname">localhost</param>\n        <param name="port">5901</param>\n        <param name="password">'"$VNC_PASS"'</param>\n    </authorize>\n</user-mapping>:' /etc/guacamole/user-mapping.xml
+sed -i 's:</user-mapping>:\n    <authorize username="'"$VNC_USER"'" password="'"$VNC_PASS"'">\n        <protocol>vnc</protocol>\n        <param name="hostname">localhost</param>\n        <param name="port">5901</param>\n        <param name="password">'"$VNC_PASS"'</param>\n        <param name="enable-audio">true</param>\n        <param name="audio-servername">localhost</param>\n    </authorize>\n</user-mapping>:' /etc/guacamole/user-mapping.xml
 sed -i 's/guacd:guacd/'"`whoami`:`id -gn`"'/' /etc/init.d/guacd
 #/etc/init.d/guacd start
 service guacd start
