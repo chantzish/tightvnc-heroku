@@ -64,7 +64,18 @@ RUN echo 1234 | sudo -S apt update && \
         nodejs \
         # for debconf-get-selections
         debconf-utils \
-        guacamole && \
+        guacamole tomcat8-user tomcat8-admin tomcat8-examples && \
+    sudo /etc/init.d/guacd stop && \
+    sudo /etc/init.d/tomcat8 stop && \
+    sudo apt install -y openjdk-8-jdk && \
+    echo -e 'appletviewer                   manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/appletviewer\nclhsdb                         manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/clhsdb\nextcheck                       manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/extcheck\nhsdb                           manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/hsdb\nidlj                           manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/idlj\njar                            manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jar\njarsigner                      manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jarsigner\njava                           manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java\njavac                          manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/javac\njavadoc                        manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/javadoc\njavah                          manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/javah\njavap                          manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/javap\njcmd                           manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jcmd\njconsole                       manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jconsole\njdb                            manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jdb\njdeps                          manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jdeps\njexec                          manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jexec\njhat                           manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jhat\njinfo                          manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jinfo\njjs                            manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/jjs\njmap                           manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jmap\njps                            manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jps\njrunscript                     manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jrunscript\njsadebugd                      manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jsadebugd\njstack                         manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jstack\njstat                          manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jstat\njstatd                         manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/jstatd\nkeytool                        manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/keytool\nnative2ascii                   manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/native2ascii\norbd                           manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/orbd\npack200                        manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/pack200\npolicytool                     manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/policytool\nrmic                           manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/rmic\nrmid                           manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/rmid\nrmiregistry                    manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/rmiregistry\nschemagen                      manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/schemagen\nserialver                      manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/serialver\nservertool                     manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/servertool\ntnameserv                      manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/tnameserv\nunpack200                      manual   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/unpack200\nwsgen                          manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/wsgen\nwsimport                       manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/wsimport\nxjc                            manual   /usr/lib/jvm/java-8-openjdk-amd64/bin/xjc' | sudo update-alternatives --set-selections && \
+    sudo sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties && \
+    wget http://downloads.sourceforge.net/project/guacamole/current/binary/guacamole-0.9.9.war && \
+    sudo sed -i 's:JDK_DIRS="/usr/lib/jvm/default-java":JDK_DIRS="/usr/lib/jvm/java-8-openjdk-amd64":' /etc/init.d/tomcat8 && \
+    sudo rm /var/lib/tomcat8/conf/Catalina/localhost/guacamole.xml && \
+    sudo mv guacamole-0.9.9.war /var/lib/tomcat8/webapps/guacamole.war && \
+    sudo /etc/init.d/tomcat8 start && \
+    sleep 30s && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
     chmod 700 ~/.ssh && \
@@ -78,9 +89,7 @@ RUN echo 1234 | sudo -S apt update && \
     echo 1234 | sudo -S rm /etc/xdg/autostart/update-notifier.desktop && \
     #sudo rm /etc/xdg/autostart/lxpolkit.desktop && \
     #sudo mv /usr/bin/lxpolkit /usr/bin/lxpolkit.ORIG && \
-    #echo "NotShowIn=GNOME;Unity;LXDE;" | sudo tee -a /etc/xdg/autostart/light-locker.desktop && \
-    #sudo sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties
-    sudo sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
+    #echo "NotShowIn=GNOME;Unity;LXDE;" | sudo tee -a /etc/xdg/autostart/light-locker.desktop && \    sudo sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-detect/#load-module module-detect/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-bluetooth-discover/#load-module module-bluetooth-discover/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-bluetooth-policy/#load-module module-bluetooth-policy/' /etc/pulse/default.pa && \
@@ -100,6 +109,7 @@ RUN echo 1234 | sudo -S apt update && \
     git clone https://github.com/gdrive-org/gdrive.git && \
     mkdir .gdrive && \
     git clone https://github.com/chantzish/dewebsockify.git && \
+    sudo /etc/init.d/tomcat8 stop && \
     sudo rm /etc/dpkg/dpkg.cfg.d/excludes && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
