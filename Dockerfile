@@ -187,7 +187,7 @@ RUN echo 1234 | sudo -S apt update && \
     #repo sync -c -j$(nproc) -q --no-clone-bundle --no-tags && \
     cd ..  && \
     sudo wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O /usr/local/sbin/winetricks && \
-    sudo chmod +x /usr/sbin/local/winetricks && \
+    sudo chmod +x /usr/local/sbin/winetricks && \
     mkdir -p ~/.cache/wine/ && \
     wget http://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-4.9.4.msi -O ~/.cache/wine/wine-mono-4.9.4.msi && \
     wget https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi -O ~/.cache/wine/wine-gecko-2.47.1-x86.msi && \
