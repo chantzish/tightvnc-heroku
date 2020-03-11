@@ -3,6 +3,7 @@ RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,di
 USER user
 WORKDIR /home/user
 ENV LANG=en_IL
+ARG FOO
 RUN echo 1234 | sudo -S apt update && \
     printf "%s" "$GIT_CONF" > .gitconfig && \
     env && \
