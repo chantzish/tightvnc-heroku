@@ -112,6 +112,7 @@ RUN echo 1234 | sudo -S apt update && \
         squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen \
         libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 \
         lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip \
+        cabextract \
         cgroup-tools && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
@@ -185,8 +186,14 @@ RUN echo 1234 | sudo -S apt update && \
     #repo init -u https://android.googlesource.com/platform/manifest -b studio-master-dev -q --depth 1 && \
     #repo sync -c -j$(nproc) -q --no-clone-bundle --no-tags && \
     cd ..  && \
-    wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && \
-    chmod +x winetricks && \
+    sudo wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O /usr/local/sbin/winetricks && \
+    sudo chmod +x /usr/sbin/local/winetricks && \
+    mkdir -p ~/.cache/wine/ && \
+    wget http://dl.winehq.org/wine/wine-mono/4.9.4/wine-mono-4.9.4.msi -O ~/.cache/wine/wine-mono-4.9.4.msi && \
+    wget https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi -O ~/.cache/wine/wine-gecko-2.47.1-x86.msi && \
+    wget https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi -O ~/.cache/wine/wine-gecko-2.47.1-x86_64.msi && \
+    WINEPREFIX=/home/user/.wine WINEARCH=win32 wine wineboot && \
+    winetricks winxp && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
