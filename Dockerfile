@@ -112,6 +112,7 @@ RUN echo 1234 | sudo -S apt update && \
     mkdir .gdrive && \
     git clone https://github.com/chantzish/dewebsockify.git && \
     #sudo /etc/init.d/tomcat8 stop && \
+    echo -e 'x-terminal-emulator            manual   /usr/bin/lxterminal' | sudo update-alternatives --set-selections && \
     sudo rm /etc/dpkg/dpkg.cfg.d/excludes && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
