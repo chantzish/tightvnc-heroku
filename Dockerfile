@@ -193,7 +193,7 @@ RUN echo 1234 | sudo -S apt update && \
     wget https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi -O ~/.cache/wine/wine-gecko-2.47.1-x86.msi && \
     wget https://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86_64.msi -O ~/.cache/wine/wine-gecko-2.47.1-x86_64.msi && \
     WINEPREFIX=/home/user/.wine WINEARCH=win32 wine wineboot && \
-    winetricks winxp && \
+    winetricks win98 && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
