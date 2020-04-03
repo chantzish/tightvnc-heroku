@@ -15,6 +15,10 @@ chmod +x /usr/local/sbin/stop.sh
 printf "%s" "$VNC_PASS" | vncpasswd -f > /home/user/.vnc/passwd
 printf "%s" "$HEROKU_LOGIN" > .netrc
 printf "%s" "$IDENTITY" > .ssh/id_rsa
+
+vncserver -geometry 1536x754 :1
+
+sleep 30s
 cd gdrive
 sed -i 's/const ClientId = ".*.apps.googleusercontent.com"/const ClientId = "'"$GDRIVE_CLIENT_ID"'"/' handlers_drive.go
 sed -i 's/const ClientSecret = ".*"/const ClientSecret = "'"$GDRIVE_CLIENT_SECRET"'"/' handlers_drive.go
@@ -31,5 +35,3 @@ git config --global user.name "$GIT_NAME"
 git config --global credential.helper store
 git config --global color.ui auto
 printf "%s" "$GIT_CREDENTIALS" > .git-credentials
-
-vncserver -geometry 1536x754 :1
