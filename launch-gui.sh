@@ -36,4 +36,4 @@ git config --global credential.helper store
 git config --global color.ui auto
 printf "%s" "$GIT_CREDENTIALS" > .git-credentials
 
-utserver -settingspath /opt/utorrent-server-alpha-v3_3/ -daemon
+cd Downloads && utserver -settingspath /opt/utorrent-server-alpha-v3_3/ -daemon

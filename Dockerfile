@@ -204,6 +204,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo ln -s /opt/utorrent-server-alpha-v3_3/utserver /usr/bin/utserver && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
+COPY settings.dat /opt/utorrent-server-alpha-v3_3/settings.dat
 COPY xstartup /home/user/.vnc/xstartup
 COPY nginx.template /home/user/nginx.template
 COPY launch.sh /home/user/launch.sh
