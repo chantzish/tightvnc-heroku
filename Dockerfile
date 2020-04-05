@@ -145,6 +145,9 @@ RUN echo 1234 | sudo -S apt update && \
     heroku version && \
     git clone https://github.com/gdrive-org/gdrive.git && \
     mkdir .gdrive && \
+    cd gdrive && \
+    go get github.com/prasmussen/gdrive && \
+    cd .. && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     sudo apt-get install -y nodejs && \
     git clone https://github.com/chantzish/dewebsockify.git && \
@@ -195,6 +198,10 @@ RUN echo 1234 | sudo -S apt update && \
     #WINEPREFIX=/home/user/.wine WINEARCH=win32 wine wineboot && \
     #winetricks win98 && \
     #wine wineboot && \
+    wget http://download-hr.utorrent.com/track/beta/endpoint/utserver/os/linux-x64-ubuntu-13-04 -O utserver-linux-x64-ubuntu-13-04.tar.gz && \
+    sudo tar xvf utserver-linux-x64-ubuntu-13-04.tar.gz -C /opt/ && \
+    # sudo apt install libssl1.0.0 libssl-dev && \
+    sudo ln -s /opt/utorrent-server-alpha-v3_3/utserver /usr/bin/utserver && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
