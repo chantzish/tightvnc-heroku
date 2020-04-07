@@ -153,6 +153,9 @@ RUN echo 1234 | sudo -S apt update && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     sudo apt-get install -y nodejs && \
     git clone https://github.com/chantzish/dewebsockify.git && \
+    cd dewebsockify && \
+    npm install && \
+    cd .. && \
     git clone --depth=1 https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b cactus-p-oss cactus-p-oss && \
     cd cactus-p-oss && \
     git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 toolchain && \
