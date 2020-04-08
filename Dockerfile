@@ -115,6 +115,9 @@ RUN echo 1234 | sudo -S apt update && \
         lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip \
         cabextract \
         ./megacmd-xUbuntu_18.04_amd64.deb \
+        winbind \
+        samba \
+        thunderbird \
         cgroup-tools && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
