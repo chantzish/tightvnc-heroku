@@ -210,6 +210,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo tar xvf utserver-linux-x64-ubuntu-13-04.tar.gz -C /opt/ && \
     # sudo apt install libssl1.0.0 libssl-dev && \
     sudo ln -s /opt/utorrent-server-alpha-v3_3/utserver /usr/bin/utserver && \
+    sudo sed -i 's/worker_processes auto/worker_processes 2/' /etc/nginx/nginx.conf && \
     sudo rm /var/lib/dpkg/statoverride
 COPY heroku.yml /home/user/heroku.yml
 COPY settings.dat /opt/utorrent-server-alpha-v3_3/settings.dat
