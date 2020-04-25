@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:18.04
 RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
 USER user
 WORKDIR /home/user
@@ -15,7 +15,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo locale-gen en_IL en_US.UTF-8 && \
     sudo update-locale LANG=en_IL && \
     sudo dpkg-reconfigure --frontend=noninteractive locales && \
-    echo -e "tzdata	tzdata/Areas	select	Asia\ntzdata	tzdata/Zones/Asia	select	Jerusalem\ntzdata	tzdata/Zones/Etc	select	UTC" | sudo debconf-set-selections && \
+    #echo -e "tzdata	tzdata/Areas	select	Asia\ntzdata	tzdata/Zones/Asia	select	Jerusalem\ntzdata	tzdata/Zones/Etc	select	UTC" | sudo debconf-set-selections && \
     sudo DEBIAN_FRONTEND=noninteractive apt install -y keyboard-configuration tzdata && \
     echo '# KEYBOARD CONFIGURATION FILE\n\n# Consult the keyboard(5) manual page.\n\nXKBMODEL="pc105"\nXKBLAYOUT="us,il"\nXKBVARIANT=","\nXKBOPTIONS="grp:alt_shift_toggle,grp_led:scroll"\n\nBACKSPACE="guess"' | sudo tee /etc/default/keyboard && \
     echo "Asia/Jerusalem" | sudo tee /etc/timezone && \
