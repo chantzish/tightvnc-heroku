@@ -29,6 +29,8 @@ cd ..
 printf "%s" "$GDRIVE_TOKEN" > .gdrive/token_v2.json
 gdrive download $TELEGRAM_LOCAL
 tar zxf telegram.local.tar.gz
+gdrive download $ZOOM
+tar zxf zoom.tar.gz
 printf "%s" "$GIT_CONF" > .gitconfig
 git config --global user.email "$GIT_EMAIL"
 git config --global user.name "$GIT_NAME"
