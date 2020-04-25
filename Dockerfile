@@ -1,12 +1,17 @@
-FROM ubuntu:18.04
+FROM ubuntu
 RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
 USER user
 WORKDIR /home/user
 ENV LANG=en_IL
 ARG FOO
 RUN echo 1234 | sudo -S apt update && \
+    #???????????????????????????
     printf "%s" "$GIT_CONF" > .gitconfig && \
     env && \
+    #???????????????????????????
+    echo "Set disable_coredump false" | sudo tee /etc/sudo.conf && \
+    sudo DEBIAN_FRONTEND=noninteractive apt install -y keyboard-configuration tzdata && \
+    #echo -e "tzdata	tzdata/Zones/Asia	select	Jerusalem\ntzdata	tzdata/Zones/Indian	select	\ntzdata	tzdata/Zones/Africa	select	\ntzdata	tzdata/Zones/Pacific	select	\ntzdata	tzdata/Zones/Antarctica	select	\ntzdata	tzdata/Zones/US	select	\ntzdata	tzdata/Zones/SystemV	select	\ntzdata	tzdata/Areas	select	Asia\ntzdata	tzdata/Zones/Arctic	select	\ntzdata	tzdata/Zones/Australia	select	\ntzdata	tzdata/Zones/America	select	\ntzdata	tzdata/Zones/Europe	select	\ntzdata	tzdata/Zones/Etc	select	UTC\ntzdata	tzdata/Zones/Atlantic	select	\n" | sudo debconf-set-selections && \
     sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg  software-properties-common && \
     echo "deb https://cli-assets.heroku.com/apt ./" | sudo tee /etc/apt/sources.list.d/heroku.list && \
     curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
@@ -15,8 +20,6 @@ RUN echo 1234 | sudo -S apt update && \
     sudo locale-gen en_IL en_US.UTF-8 && \
     sudo update-locale LANG=en_IL && \
     sudo dpkg-reconfigure --frontend=noninteractive locales && \
-    #echo -e "tzdata	tzdata/Areas	select	Asia\ntzdata	tzdata/Zones/Asia	select	Jerusalem\ntzdata	tzdata/Zones/Etc	select	UTC" | sudo debconf-set-selections && \
-    sudo DEBIAN_FRONTEND=noninteractive apt install -y keyboard-configuration tzdata && \
     echo '# KEYBOARD CONFIGURATION FILE\n\n# Consult the keyboard(5) manual page.\n\nXKBMODEL="pc105"\nXKBLAYOUT="us,il"\nXKBVARIANT=","\nXKBOPTIONS="grp:alt_shift_toggle,grp_led:scroll"\n\nBACKSPACE="guess"' | sudo tee /etc/default/keyboard && \
     echo "Asia/Jerusalem" | sudo tee /etc/timezone && \
     sudo ln -snf /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
