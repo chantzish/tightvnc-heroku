@@ -10,6 +10,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg  software-properties-common && \
     echo "deb https://cli-assets.heroku.com/apt ./" | sudo tee /etc/apt/sources.list.d/heroku.list && \
     curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
+    wget https://zoom.us/client/latest/zoom_amd64.deb && \
     wget https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megacmd-xUbuntu_18.04_amd64.deb && \
     sudo locale-gen en_IL en_US.UTF-8 && \
     sudo update-locale LANG=en_IL && \
@@ -115,6 +116,8 @@ RUN echo 1234 | sudo -S apt update && \
         lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip \
         cabextract \
         ./megacmd-xUbuntu_18.04_amd64.deb \
+        ./zoom_amd64.deb \
+        kazam \
         winbind \
         samba \
         thunderbird \
