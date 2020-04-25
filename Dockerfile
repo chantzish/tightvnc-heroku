@@ -118,6 +118,8 @@ RUN echo 1234 | sudo -S apt update && \
         ./megacmd-xUbuntu_18.04_amd64.deb \
         ./zoom_amd64.deb \
         kazam \
+        # for debconf-get-selections for not interactive apt/dpkg install
+        debconf-utils \
         winbind \
         samba \
         thunderbird \
