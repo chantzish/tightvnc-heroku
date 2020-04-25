@@ -1,4 +1,4 @@
-FROM ubuntu:19.10
+FROM ubuntu
 RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
 USER user
 WORKDIR /home/user
@@ -100,11 +100,12 @@ RUN echo 1234 | sudo -S apt update && \
         gettext-base \
         firefox \
         vlc \
-        leafpad \
+        #leafpad \
         file-roller \
         transmission \
         evince \
-        lubuntu-core \
+        #lubuntu-core \
+        lubuntu-gtk-core \
         golang-go \
         tint2 \
         ffmpeg \
