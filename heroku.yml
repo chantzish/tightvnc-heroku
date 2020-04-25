@@ -2,4 +2,6 @@ build:
   docker:
     web: Dockerfile
   config:
-    FOO: bar
+    FOO: |
+      bar
+      bar
