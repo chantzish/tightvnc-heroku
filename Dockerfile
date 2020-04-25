@@ -112,7 +112,7 @@ RUN echo 1234 | sudo -S apt update && \
         expect-dev \
         #default-jdk \
         libssl-dev libffi-dev python-dev python3-dev ncurses-dev \
-        python-pip \
+        #python-pip \
         python-pip-whl \
         python3-pip virtualenv \
         openjdk-8-jdk \
