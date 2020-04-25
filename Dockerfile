@@ -1,9 +1,9 @@
-FROM ubuntu
+FROM ubuntu:19.10
 RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
 USER user
 WORKDIR /home/user
 ENV LANG=en_IL
-ARG FOO
+ARG GIT_CONF
 RUN echo 1234 | sudo -S apt update && \
     #???????????????????????????
     printf "%s" "$GIT_CONF" > .gitconfig && \
