@@ -49,10 +49,10 @@ RUN echo 1234 | sudo -S apt update && \
         libbz2-1.0:i386 \
         libdb5.3:i386 \
         libexpat1:i386 \
-        libffi6:i386 \
+        #libffi6:i386 \
         libgpm2:i386 \
         libncursesw5:i386 \
-        libpython-stdlib:i386 \
+        #libpython-stdlib:i386 \
         libpython2.7-minimal:i386 \
         libpython2.7-stdlib:i386 && \
     sudo apt install -y \
