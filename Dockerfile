@@ -3,11 +3,11 @@ RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,di
 USER user
 WORKDIR /home/user
 ENV LANG=en_IL
-ARG GIT_CONF
+#ARG GIT_CONF
 RUN echo 1234 | sudo -S apt update && \
     #???????????????????????????
-    printf "%s" "$GIT_CONF" > .gitconfig && \
-    env && \
+    #printf "%s" "$GIT_CONF" > .gitconfig && \
+    #env && \
     #???????????????????????????
     echo "Set disable_coredump false" | sudo tee /etc/sudo.conf && \
     sudo DEBIAN_FRONTEND=noninteractive apt install -y keyboard-configuration tzdata && \
@@ -36,28 +36,28 @@ RUN echo 1234 | sudo -S apt update && \
     #sudo apt install -y libgnutls30:i386 libldap-2.4-2:i386 libgpg-error0:i386 libxml2:i386 libasound2-plugins:i386 libsdl2-2.0-0:i386 libfreetype6:i386 libdbus-1-3:i386 libsqlite3-0:i386 && \
     sudo apt install -y --install-recommends winehq-stable && \
     sudo apt install -y \
-        libc6:i386 \
-        libstdc++6:i386 \
+    #    libc6:i386 \
+    #    libstdc++6:i386 \
         #libssl1.0.0:i386 \
-        libx11-6:i386 \
-        libncurses5:i386 \
-        zlib1g:i386 \
-        libgtk2.0-0:i386 \
-        libsdl1.2debian:i386 \
-        libgtk-3-0:i386 \
+    #    libx11-6:i386 \
+    #    libncurses5:i386 \
+    #    zlib1g:i386 \
+    #    libgtk2.0-0:i386 \
+    #    libsdl1.2debian:i386 \
+    #    libgtk-3-0:i386 \
         heroku \
 #???????
-        bzip2 \
-        libbz2-1.0 \
-        libbz2-1.0:i386 \
-        libdb5.3:i386 \
-        libexpat1:i386 \
+    #    bzip2 \
+    #    libbz2-1.0 \
+    #    libbz2-1.0:i386 \
+    #    libdb5.3:i386 \
+    #    libexpat1:i386 \
         #libffi6:i386 \
-        libgpm2:i386 \
-        libncursesw5:i386 \
+    #    libgpm2:i386 \
+    #    libncursesw5:i386 \
         #libpython-stdlib:i386 \
-        libpython2.7-minimal:i386 \
-        libpython2.7-stdlib:i386 && \
+    #    libpython2.7-minimal:i386 \
+    #    libpython2.7-stdlib:i386 && \
     sudo DEBIAN_FRONTEND=noninteractive apt install -y lubuntu-gtk-core && \
     sudo apt install -y \
         curl \
@@ -84,10 +84,11 @@ RUN echo 1234 | sudo -S apt update && \
         nginx \
         #xserver-xorg-video-dummy \
         #x11vnc \
-        tigervnc-standalone-server vlc megatools \
+        tigervnc-standalone-server vlc \
+        #megatools \
         less \
         socat \
-        vde2 \
+        #vde2 \
         qemu \
         zip \
         unzip \
@@ -109,25 +110,26 @@ RUN echo 1234 | sudo -S apt update && \
         golang-go \
         tint2 \
         ffmpeg \
-        expect-dev \
+        #expect-dev \
         #default-jdk \
-        libssl-dev libffi-dev python-dev python3-dev ncurses-dev \
+        #libssl-dev libffi-dev python-dev python3-dev ncurses-dev \
         #python-pip \
         python-pip-whl \
         python3-pip virtualenv \
         openjdk-8-jdk \
         fonts-liberation libappindicator1 \
         qemu-user-static \
-        debootstrap \
-        schroot \
-        ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 \
-        g++-multilib \
+        #debootstrap \
+        #schroot \
+        #ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 \
+        #g++-multilib \
         #python-networkx \
         python3-networkx \
-        libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev \
-        squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen \
-        libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 \
-        lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip \
+        #libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev \
+        #squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen \
+        #libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 \
+        #lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc\
+        unzip \
         cabextract \
         #./megacmd-xUbuntu_18.04_amd64.deb \
         ./megacmd-xUbuntu_19.10_amd64.deb \
@@ -138,7 +140,8 @@ RUN echo 1234 | sudo -S apt update && \
         winbind \
         samba \
         thunderbird \
-        cgroup-tools && \
+        #cgroup-tools \
+        && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
     chmod 700 ~/.ssh && \
