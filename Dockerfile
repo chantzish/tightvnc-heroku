@@ -17,7 +17,8 @@ RUN echo 1234 | sudo -S apt update && \
     curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
     wget https://zoom.us/client/latest/zoom_amd64.deb && \
     #wget https://mega.nz/linux/MEGAsync/xUbuntu_18.04/amd64/megacmd-xUbuntu_18.04_amd64.deb && \
-    wget https://mega.nz/linux/MEGAsync/xUbuntu_19.10/amd64/megacmd-xUbuntu_19.10_amd64.deb && \
+    #wget https://mega.nz/linux/MEGAsync/xUbuntu_19.10/amd64/megacmd-xUbuntu_19.10_amd64.deb && \
+    wget https://mega.nz/linux/MEGAsync/xUbuntu_20.04/amd64/megacmd-xUbuntu_20.04_amd64.deb && \
     sudo locale-gen en_IL en_US.UTF-8 && \
     sudo update-locale LANG=en_IL && \
     sudo dpkg-reconfigure --frontend=noninteractive locales && \
@@ -29,12 +30,13 @@ RUN echo 1234 | sudo -S apt update && \
     wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
     sudo apt-key add winehq.key && \
     #sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' && \
-    sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ eoan main' && \
+    #sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ eoan main' && \
+    sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
     #sudo add-apt-repository ppa:cybermax-dexter/sdl2-backport && \
     sudo apt-add-repository universe && \
     sudo apt update && \
     #sudo apt install -y libgnutls30:i386 libldap-2.4-2:i386 libgpg-error0:i386 libxml2:i386 libasound2-plugins:i386 libsdl2-2.0-0:i386 libfreetype6:i386 libdbus-1-3:i386 libsqlite3-0:i386 && \
-    sudo apt install -y --install-recommends winehq-stable && \
+    sudo apt install -y --install-recommends winehq-devel && \
     sudo apt install -y \
     #    libc6:i386 \
     #    libstdc++6:i386 \
@@ -132,7 +134,8 @@ RUN echo 1234 | sudo -S apt update && \
         unzip \
         cabextract \
         #./megacmd-xUbuntu_18.04_amd64.deb \
-        ./megacmd-xUbuntu_19.10_amd64.deb \
+        #./megacmd-xUbuntu_19.10_amd64.deb \
+        ./megacmd-xUbuntu_20.04_amd64.deb \
         ./zoom_amd64.deb \
         kazam \
         # for debconf-get-selections for not interactive apt/dpkg install
