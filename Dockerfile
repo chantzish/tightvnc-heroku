@@ -179,44 +179,44 @@ RUN echo 1234 | sudo -S apt update && \
     cd dewebsockify && \
     npm install && \
     cd .. && \
-    git clone --depth=1 https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b cactus-p-oss cactus-p-oss && \
-    cd cactus-p-oss && \
-    git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 toolchain && \
-    cd toolchain && \
-    git checkout d8df6b5a187d49fce217569ad493cdb8554afc4e -b toolchain && \
-    sed -i 's/time.sleep(3)/#time.sleep(3)/' ./bin/arm-linux-androideabi-gcc && \
-    sed -i 's/time.sleep(3)/#time.sleep(3)/' ./bin/arm-linux-androideabi-g++ && \
-    cd .. && \
-    mkdir out && \
-    export ARCH=arm && \
-    export SUBARCH=arm && \
-    export CROSS_COMPILE=${PWD}/toolchain/bin/arm-linux-androideabi- && \
-    export DTC_EXT=dtc && \
-    sed -i 's:CONFIG_BUILD_ARM_DTB_OVERLAY_IMAGE_NAMES="cereus":CONFIG_BUILD_ARM_DTB_OVERLAY_IMAGE=y\nCONFIG_BUILD_ARM_DTB_OVERLAY_IMAGE_NAMES="cereus":' arch/arm/configs/cereus_defconfig && \
-    make O=out cereus_defconfig && \
+    #git clone --depth=1 https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b cactus-p-oss cactus-p-oss && \
+    #cd cactus-p-oss && \
+    #git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 toolchain && \
+    #cd toolchain && \
+    #git checkout d8df6b5a187d49fce217569ad493cdb8554afc4e -b toolchain && \
+    #sed -i 's/time.sleep(3)/#time.sleep(3)/' ./bin/arm-linux-androideabi-gcc && \
+    #sed -i 's/time.sleep(3)/#time.sleep(3)/' ./bin/arm-linux-androideabi-g++ && \
+    #cd .. && \
+    #mkdir out && \
+    #export ARCH=arm && \
+    #export SUBARCH=arm && \
+    #export CROSS_COMPILE=${PWD}/toolchain/bin/arm-linux-androideabi- && \
+    #export DTC_EXT=dtc && \
+    #sed -i 's:CONFIG_BUILD_ARM_DTB_OVERLAY_IMAGE_NAMES="cereus":CONFIG_BUILD_ARM_DTB_OVERLAY_IMAGE=y\nCONFIG_BUILD_ARM_DTB_OVERLAY_IMAGE_NAMES="cereus":' arch/arm/configs/cereus_defconfig && \
+    #make O=out cereus_defconfig && \
     #make -j$(nproc) O=out 2>&1 | tee kernel.log && \
-    cd .. && \
-    mkdir dummy && cd dummy && \
-    wget https://github.com/giometti/linux_device_driver_development_cookbook/raw/master/chapter_02/module/Makefile && \
-    wget https://github.com/giometti/linux_device_driver_development_cookbook/raw/master/chapter_02/module/dummy-code.c && \
-    sed -i 's/ARCH ?= arm64\nCROSS_COMPILE ?= aarch64-linux-gnu/ARCH ?= arm/' Makefile && \
+    #cd .. && \
+    #mkdir dummy && cd dummy && \
+    #wget https://github.com/giometti/linux_device_driver_development_cookbook/raw/master/chapter_02/module/Makefile && \
+    #wget https://github.com/giometti/linux_device_driver_development_cookbook/raw/master/chapter_02/module/dummy-code.c && \
+    #sed -i 's/ARCH ?= arm64\nCROSS_COMPILE ?= aarch64-linux-gnu/ARCH ?= arm/' Makefile && \
     #Make KERNEL_DIR=cactus-p-oss O=../cactus-p-oss/out && \
-    unset ARCH && \
-    unset SUBARCH && \
-    unset CROSS_COMPILE && \
-    unset DTC_EXT && \
-    cd .. && \
-    sudo curl https://storage.googleapis.com/git-repo-downloads/repo -o /bin/repo && \
-    sudo chmod a+x /bin/repo && \
-    mkdir aosp && cd aosp && \
+    #unset ARCH && \
+    #unset SUBARCH && \
+    #unset CROSS_COMPILE && \
+    #unset DTC_EXT && \
+    #cd .. && \
+    #sudo curl https://storage.googleapis.com/git-repo-downloads/repo -o /bin/repo && \
+    #sudo chmod a+x /bin/repo && \
+    #mkdir aosp && cd aosp && \
     #repo init -u https://android.googlesource.com/platform/manifest -b android-9.0.0_r3 -q --depth 1 && \
     #repo sync -c -j$(nproc) -q --no-clone-bundle --no-tags && \
-    cd .. && \
-    mkdir studio-master-dev && \
-    cd studio-master-dev && \
+    #cd .. && \
+    #mkdir studio-master-dev && \
+    #cd studio-master-dev && \
     #repo init -u https://android.googlesource.com/platform/manifest -b studio-master-dev -q --depth 1 && \
     #repo sync -c -j$(nproc) -q --no-clone-bundle --no-tags && \
-    cd ..  && \
+    #cd ..  && \
     sudo wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O /usr/local/sbin/winetricks && \
     sudo chmod +x /usr/local/sbin/winetricks && \
     mkdir -p ~/.cache/wine/ && \
