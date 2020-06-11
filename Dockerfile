@@ -60,7 +60,7 @@ RUN echo 1234 | sudo -S apt update && \
         #libpython-stdlib:i386 \
     #    libpython2.7-minimal:i386 \
     #    libpython2.7-stdlib:i386 && \
-    sudo DEBIAN_FRONTEND=noninteractive apt install -y lubuntu-gtk-core && \
+    sudo DEBIAN_FRONTEND=noninteractive apt install -y lubuntu-desktop && \
     sudo apt install -y \
         curl \
         binutils \
