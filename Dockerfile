@@ -149,11 +149,11 @@ RUN echo 1234 | sudo -S apt update && \
     echo export LANG=en_IL >> .profile && \
     #echo export JAVA_HOME=/usr/lib/jvm/default-java >> .profile && \
     echo export PATH=$PATH:/home/user/.local/bin/ >> .profile && \
-    echo 1234 | sudo -S rm /etc/xdg/autostart/update-notifier.desktop && \
+    #echo 1234 | sudo -S rm /etc/xdg/autostart/update-notifier.desktop && \
     #sudo rm /etc/xdg/autostart/lxpolkit.desktop && \
     #sudo mv /usr/bin/lxpolkit /usr/bin/lxpolkit.ORIG && \
     #echo "NotShowIn=GNOME;Unity;LXDE;" | sudo tee -a /etc/xdg/autostart/light-locker.desktop && \
-    sudo sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties && \
+    echo 1234 | sudo -S sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties && \
     sudo sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-bluetooth-discover/#load-module module-bluetooth-discover/' /etc/pulse/default.pa && \
     echo KexAlgorithms +diffie-hellman-group1-sha1 | sudo tee -a /etc/ssh/sshd_config && \
