@@ -112,9 +112,9 @@ RUN export PATH="/home/user/.local/bin/:/usr/games:$PATH" && \
     npm install && \
     #sudo rm /var/lib/dpkg/statoverride && \
     if [ ! -d ".vnc" ]; then mkdir .vnc; fi && \
-    echo 1234 | sudo -S chown -R 1000:1000 /etc/ssh && \
-    echo 1234 | sudo -S chmod -R 600 /etc/ssh/ssh_config.d/ && \
-    echo 1234 | sudo -S chown -R 1000:1000 /etc/ssh /etc/nginx /usr/lib64/nginx/modules /usr/share/nginx /var/lib/nginx /var/log/nginx && \
+    echo 1234 | sudo -S chown -R 1000:1000 /etc/ssh /usr/lib/openssh /usr/share/openssh/ && \
+    #echo 1234 | sudo -S chmod -R 600 /etc/ssh/ssh_config.d && \
+    echo 1234 | sudo -S chown -R 1000:1000 /etc/nginx /var/lib/nginx /var/log/nginx /var/www /usr/share/nginx /usr/share/nginx/modules && \
     echo 1234 | sudo -S chown 1000:1000 /etc/logrotate.d/nginx && \
     echo 1234 | sudo -S chmod a+w /run && \
     if [ ! -d ".local/bin" ]; then mkdir -p .local/bin; fi && \
