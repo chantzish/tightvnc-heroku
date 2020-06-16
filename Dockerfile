@@ -111,7 +111,6 @@ RUN export PATH="/home/user/.local/bin/:/usr/games:$PATH" && \
     cd dewebsockify && \
     npm install && \
     sudo rm /var/lib/dpkg/statoverride
-COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
 COPY nginx.template /home/user/nginx.template
 COPY launch.sh /home/user/launch.sh
