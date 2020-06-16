@@ -2,13 +2,7 @@
 
 export HOME=/home/user
 export USER=`whoami`
-export LANG=en_IL
-#xsetroot -solid grey
-#x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
-#x-window-manager &
-# Fix to make GNOME work
-#export XKL_XMODMAP_DISABLE=1
-#export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/
-#/usr/bin/lxsession -s Lubuntu &
-env LXQT_DEFAULT_OPENBOX_CONFIG="/etc/xdg/xdg-Lubuntu/openbox/lxqt-rc.xml" /usr/bin/startlxqt &
+export LANG=en_US.UTF-8
+export PATH="/home/user/.local/bin/:/usr/games:$PATH"
+/usr/bin/lxsession -s Lubuntu &
 vncconfig -nowin &
