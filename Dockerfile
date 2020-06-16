@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m -s /bin/bash user && yes "1234" | passwd user
+RUN apt update && apt install -y sudo && useradd -D -s /bin/bash && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m -s /bin/bash user && yes "1234" | passwd user
 #USER user
 USER 1000
 WORKDIR /home/user
