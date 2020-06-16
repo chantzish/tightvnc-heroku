@@ -4,7 +4,8 @@
 export DOLLAR='$'
 export HOME=/home/user
 export USER=`whoami`
-export LANG=en_IL
+export LANG=en_US.UTF-8
+export PATH="/home/user/.local/bin/:/usr/games:$PATH"
 envsubst < nginx.template > /etc/nginx/sites-enabled/default
 touch /opt/noVNC/`whoami`
 cd /opt/noVNC && ./utils/launch.sh --listen 6080 --vnc localhost:5901 &
