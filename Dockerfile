@@ -22,9 +22,12 @@ RUN export PATH="/home/user/.local/bin/:/usr/games:$PATH" && \
     sudo ln -snf /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
     sudo dpkg-reconfigure --frontend=noninteractive keyboard-configuration tzdata && \
     sudo dpkg --add-architecture i386 && \
+    #echo "deb https://cli-assets.heroku.com/apt ./" | sudo tee /etc/apt/sources.list.d/heroku.list && \
+    #curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
     sudo apt-add-repository universe && \
     sudo apt update && \
     sudo apt install -y \
+        #heroku \
         curl \
         binutils \
         build-essential \
@@ -111,6 +114,7 @@ RUN export PATH="/home/user/.local/bin/:/usr/games:$PATH" && \
     cd dewebsockify && \
     npm install && \
     #sudo rm /var/lib/dpkg/statoverride && \
+    cd .. && \
     if [ ! -d ".vnc" ]; then mkdir .vnc; fi && \
     echo 1234 | sudo -S chown -R 1000:1000 /etc/ssh /usr/lib/openssh /usr/share/openssh/ && \
     #echo 1234 | sudo -S chmod -R 600 /etc/ssh/ssh_config.d && \
@@ -119,6 +123,9 @@ RUN export PATH="/home/user/.local/bin/:/usr/games:$PATH" && \
     echo 1234 | sudo -S chmod a+w /run && \
     if [ ! -d ".local/bin" ]; then mkdir -p .local/bin; fi && \
     mkdir Downloads
+    # heroku version && \
+    # heroku plugins:install heroku-builds
+# COPY heroku.yml /home/user/heroku.yml
 COPY xstartup /home/user/.vnc/xstartup
 COPY nginx.template /home/user/nginx.template
 COPY launch.sh /home/user/launch.sh
