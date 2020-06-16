@@ -74,7 +74,7 @@ RUN export PATH="/home/user/.local/bin/:/usr/games:$PATH" && \
         # for debconf-get-selections for not interactive apt/dpkg install
         debconf-utils \
         && \
-    sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
+    echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
     chmod 700 ~/.ssh && \
     sudo git clone https://github.com/novnc/noVNC.git /opt/noVNC && \
