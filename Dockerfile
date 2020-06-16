@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
+RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m -s /bin/bash user && yes "1234" | passwd user
 #USER user
 USER 1000
 WORKDIR /home/user
@@ -89,6 +89,8 @@ RUN export PATH="/home/user/.local/bin/:/usr/games:$PATH" && \
     echo export LANG=en_US.UTF-8 >> .profile && \
     echo export HOME=/home/user >> .profile && \
     echo "export PATH=\"/home/user/.local/bin/:/usr/games:\$PATH\"" >> .profile && \
+    echo 1234 | sudo -S sed -i 's/NotShowIn=/NotShowIn=LXDE;/' /etc/xdg/autostart/update-notifier.desktop && \
+    echo 1234 | sudo -S sed -i 's/NotShowIn=/NotShowIn=LXDE;/' /etc/xdg/autostart/nm-applet.desktop && \
     echo 1234 | sudo -S sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties && \
     sudo sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-bluetooth-discover/#load-module module-bluetooth-discover/' /etc/pulse/default.pa && \
