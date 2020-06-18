@@ -22,10 +22,10 @@ RUN echo 1234 | sudo -S apt update && \
     curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
     wget https://zoom.us/client/latest/zoom_amd64.deb && \
     wget https://mega.nz/linux/MEGAsync/xUbuntu_20.04/amd64/megacmd-xUbuntu_20.04_amd64.deb && \
-    wget 'https://launchpad.net/~ubuntu-security-proposed/+archive/ubuntu/ppa/+build/16429988/+files/libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb' && \
-    wget 'https://launchpad.net/~ubuntu-security-proposed/+archive/ubuntu/ppa/+build/16429988/+files/libssl1.0-dev_1.0.2n-1ubuntu6.2_amd64.deb' && \
-    wget 'https://ftp.hetzner.de/ubuntu/packages/pool/main/o/openssl1.0/libssl1.0.0_1.0.2n-1ubuntu6.2_i386.deb' && \
-    wget 'https://ftp.hetzner.de/ubuntu/packages/pool/main/o/openssl1.0/libssl1.0-dev_1.0.2n-1ubuntu6.2_i386.deb' && \
+    #wget 'https://launchpad.net/~ubuntu-security-proposed/+archive/ubuntu/ppa/+build/16429988/+files/libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb' && \
+    #wget 'https://launchpad.net/~ubuntu-security-proposed/+archive/ubuntu/ppa/+build/16429988/+files/libssl1.0-dev_1.0.2n-1ubuntu6.2_amd64.deb' && \
+    #wget 'https://ftp.hetzner.de/ubuntu/packages/pool/main/o/openssl1.0/libssl1.0.0_1.0.2n-1ubuntu6.2_i386.deb' && \
+    #wget 'https://ftp.hetzner.de/ubuntu/packages/pool/main/o/openssl1.0/libssl1.0-dev_1.0.2n-1ubuntu6.2_i386.deb' && \
     sudo dpkg --add-architecture i386 && \
     wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
     sudo apt-key add winehq.key && \
@@ -84,8 +84,8 @@ RUN echo 1234 | sudo -S apt update && \
         ./zoom_amd64.deb \
         kazam \
         # for utorrent server
-        ./libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb ./libssl1.0-dev_1.0.2n-1ubuntu6.2_amd64.deb \
-        ./libssl1.0.0_1.0.2n-1ubuntu6.2_i386.deb ./libssl1.0-dev_1.0.2n-1ubuntu6.2_i386.deb \
+        #./libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb ./libssl1.0-dev_1.0.2n-1ubuntu6.2_amd64.deb \
+        #./libssl1.0.0_1.0.2n-1ubuntu6.2_i386.deb ./libssl1.0-dev_1.0.2n-1ubuntu6.2_i386.deb \
         #libssl1.0.0 libssl-dev \
         # for debconf-get-selections for not interactive apt/dpkg install
         #debconf-utils \
