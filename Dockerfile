@@ -24,13 +24,15 @@ RUN echo 1234 | sudo -S apt update && \
     wget https://mega.nz/linux/MEGAsync/xUbuntu_20.04/amd64/megacmd-xUbuntu_20.04_amd64.deb && \
     wget 'https://launchpad.net/~ubuntu-security-proposed/+archive/ubuntu/ppa/+build/16429988/+files/libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb' && \
     wget 'https://launchpad.net/~ubuntu-security-proposed/+archive/ubuntu/ppa/+build/16429988/+files/libssl1.0-dev_1.0.2n-1ubuntu6.2_amd64.deb' && \
+    wget 'https://ftp.hetzner.de/ubuntu/packages/pool/main/o/openssl1.0/libssl1.0.0_1.0.2n-1ubuntu6.2_i386.deb' && \
+    wget 'https://ftp.hetzner.de/ubuntu/packages/pool/main/o/openssl1.0/libssl1.0-dev_1.0.2n-1ubuntu6.2_i386.deb' && \
     sudo dpkg --add-architecture i386 && \
     wget -nc https://dl.winehq.org/wine-builds/winehq.key && \
     sudo apt-key add winehq.key && \
     sudo add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ focal main' && \
     sudo apt-add-repository universe && \
     # try fix utorrent
-    sudo add-apt-repository ppa:ubuntu-security-proposed/ppa && \
+    #sudo add-apt-repository ppa:ubuntu-security-proposed/ppa && \
     sudo apt update && \
     sudo apt install -y --install-recommends winehq-devel && \
     # prevent gdm3 from installing as dependency of lubuntu-desktop
@@ -82,8 +84,9 @@ RUN echo 1234 | sudo -S apt update && \
         ./zoom_amd64.deb \
         kazam \
         # for utorrent server
-        #./libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb libssl1.0-dev_1.0.2n-1ubuntu6.2_amd64.deb \
-        libssl1.0.0 libssl-dev \
+        ./libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb ./libssl1.0-dev_1.0.2n-1ubuntu6.2_amd64.deb \
+        ./libssl1.0.0_1.0.2n-1ubuntu6.2_i386.deb ./libssl1.0-dev_1.0.2n-1ubuntu6.2_i386.deb \
+        #libssl1.0.0 libssl-dev \
         # for debconf-get-selections for not interactive apt/dpkg install
         #debconf-utils \
         # lower image size
