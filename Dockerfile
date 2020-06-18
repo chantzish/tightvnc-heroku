@@ -79,7 +79,7 @@ RUN echo 1234 | sudo -S apt update && \
         ./zoom_amd64.deb \
         kazam \
         # for utorrent server
-        ./libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb 
+        ./libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb \
         #libssl1.0.0 libssl-dev \
         # for debconf-get-selections for not interactive apt/dpkg install
         #debconf-utils \
