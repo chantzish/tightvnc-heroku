@@ -96,9 +96,10 @@ RUN echo 1234 | sudo -S apt update && \
     sudo git clone https://github.com/novnc/websockify /opt/noVNC/utils/websockify && \
     sudo sed -i 's/${WEBSOCKIFY} ${SSLONLY} --web ${WEB}/${WEBSOCKIFY} ${SSLONLY} --heartbeat=45 --web ${WEB}/' /opt/noVNC/utils/launch.sh && \
     sudo sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config && \
-    echo export LANG=en_US.UTF-8 >> .profile && \
     #echo export JAVA_HOME=/usr/lib/jvm/default-java >> .profile && \
-    echo export PATH=$PATH:/home/user/.local/bin:/usr/games:/usr/local/games >> .profile && \
+    echo export LANG=en_US.UTF-8 >> .profile && \
+    echo export HOME=/home/user >> .profile && \
+    echo export PATH=\"\$PATH:/home/user/.local/bin:/usr/games:/usr/local/games\" >> .profile && \
     #echo 1234 | sudo -S rm /etc/xdg/autostart/update-notifier.desktop && \
     #sudo rm /etc/xdg/autostart/lxpolkit.desktop && \
     #sudo mv /usr/bin/lxpolkit /usr/bin/lxpolkit.ORIG && \
