@@ -30,7 +30,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo apt update && \
     sudo apt install -y --install-recommends winehq-devel && \
     # prevent gdm3 from installing as dependency of lubuntu-desktop
-    sudo apt install -y lxqt-notificationd
+    sudo apt install -y lxqt-notificationd && \
     sudo apt install -y \
         heroku \
         lubuntu-desktop \
