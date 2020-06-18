@@ -3,12 +3,13 @@ RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,di
 USER user
 WORKDIR /home/user
 ENV LANG=en_US.UTF-8
+COPY apt-xapian-index_999.002_all.deb /home/user/apt-xapian-index_999.002_all.deb
 RUN echo 1234 | sudo -S apt update && \
     # prevent sudo error message
     echo "Set disable_coredump false" | sudo tee /etc/sudo.conf && \
     # some basic packages and special non interactive
     sudo DEBIAN_FRONTEND=noninteractive apt install -y keyboard-configuration tzdata && \
-    sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg software-properties-common && \
+    sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg software-properties-common ./apt-xapian-index_999.002_all.deb && \
     sudo locale-gen en_IL en_US.UTF-8 && \
     sudo update-locale LANG=en_IL && \
     sudo dpkg-reconfigure --frontend=noninteractive locales && \
