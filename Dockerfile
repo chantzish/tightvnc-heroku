@@ -1,5 +1,5 @@
 FROM ubuntu
-RUN apt update && apt install -y sudo && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -m user && yes "1234" | passwd user
+RUN apt update && apt install -y sudo && useradd -D -s /bin/bash && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | passwd user
 USER user
 WORKDIR /home/user
 ENV LANG=en_US.UTF-8
@@ -13,7 +13,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo locale-gen en_IL en_US.UTF-8 && \
     sudo update-locale LANG=en_IL && \
     sudo dpkg-reconfigure --frontend=noninteractive locales && \
-    echo '# KEYBOARD CONFIGURATION FILE\n\n# Consult the keyboard(5) manual page.\n\nXKBMODEL="pc105"\nXKBLAYOUT="us,il"\nXKBVARIANT=","\nXKBOPTIONS="grp:alt_shift_toggle,grp_led:scroll"\n\nBACKSPACE="guess"' | sudo tee /etc/default/keyboard && \
+    echo -e '# KEYBOARD CONFIGURATION FILE\n\n# Consult the keyboard(5) manual page.\n\nXKBMODEL="pc105"\nXKBLAYOUT="us,il"\nXKBVARIANT=","\nXKBOPTIONS="grp:alt_shift_toggle,grp_led:scroll"\n\nBACKSPACE="guess"' | sudo tee /etc/default/keyboard && \
     echo "Asia/Jerusalem" | sudo tee /etc/timezone && \
     sudo ln -snf /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
     sudo dpkg-reconfigure --frontend=noninteractive keyboard-configuration tzdata && \
@@ -109,10 +109,13 @@ RUN echo 1234 | sudo -S apt update && \
     echo export LANG=en_US.UTF-8 >> .profile && \
     echo export HOME=/home/user >> .profile && \
     echo export PATH=\"\$PATH:/home/user/.local/bin:/usr/games:/usr/local/games\" >> .profile && \
-    #echo 1234 | sudo -S rm /etc/xdg/autostart/update-notifier.desktop && \
+    sudo sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/autostart/nm-applet.desktop && \
+    sudo sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/autostart/nm-tray-autostart.desktop && \
+    echo "NotShowIn=LXQt;" | sudo tee -a /etc/xdg/autostart/upg-notifier-autostart.desktop && \
+    sudo sed -i 's/OnlyShowIn=LXQt/NotShowIn=LXQt/' /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop && \
+    sudo sed -i 's/OnlyShowIn=LXQt/NotShowIn=LXQt/' /etc/xdg/autostart/lxqt-powermanagement.desktop && \
     #sudo rm /etc/xdg/autostart/lxpolkit.desktop && \
     #sudo mv /usr/bin/lxpolkit /usr/bin/lxpolkit.ORIG && \
-    #echo "NotShowIn=GNOME;Unity;LXDE;" | sudo tee -a /etc/xdg/autostart/light-locker.desktop && \
     #echo 1234 | sudo -S sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties && \
     sudo sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
     sudo sed -i 's/load-module module-bluetooth-discover/#load-module module-bluetooth-discover/' /etc/pulse/default.pa && \
