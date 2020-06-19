@@ -16,7 +16,7 @@ chmod 600 ~/.ssh/authorized_keys
 
 cd /home/user
 # fix according to site
-echo -e '#!/bin/sh\n\nwhile :; do wget '$APP_NAME'.herokuapp.com -q -O /dev/null -o /dev/null; sleep 4m; done &' | tee /usr/local/sbin/stop.sh
+echo '#!/bin/sh\n\nwhile :; do wget '$APP_NAME'.herokuapp.com -q -O /dev/null -o /dev/null; sleep 4m; done &' | tee /usr/local/sbin/stop.sh
 chmod +x /usr/local/sbin/stop.sh
 
 #mkdir -m 1777 /tmp/.X11-unix
