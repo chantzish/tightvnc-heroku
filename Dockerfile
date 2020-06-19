@@ -13,7 +13,7 @@ RUN echo 1234 | sudo -S apt update && \
     sudo locale-gen en_IL en_US.UTF-8 && \
     sudo update-locale LANG=en_IL && \
     sudo dpkg-reconfigure --frontend=noninteractive locales && \
-    echo -e '# KEYBOARD CONFIGURATION FILE\n\n# Consult the keyboard(5) manual page.\n\nXKBMODEL="pc105"\nXKBLAYOUT="us,il"\nXKBVARIANT=","\nXKBOPTIONS="grp:alt_shift_toggle,grp_led:scroll"\n\nBACKSPACE="guess"' | sudo tee /etc/default/keyboard && \
+    echo '# KEYBOARD CONFIGURATION FILE\n\n# Consult the keyboard(5) manual page.\n\nXKBMODEL="pc105"\nXKBLAYOUT="us,il"\nXKBVARIANT=","\nXKBOPTIONS="grp:alt_shift_toggle,grp_led:scroll"\n\nBACKSPACE="guess"' | sudo tee /etc/default/keyboard && \
     echo "Asia/Jerusalem" | sudo tee /etc/timezone && \
     sudo ln -snf /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
     sudo dpkg-reconfigure --frontend=noninteractive keyboard-configuration tzdata && \
@@ -46,9 +46,6 @@ RUN echo 1234 | sudo -S apt update && \
         autoconf \
         fakeroot \
         fakechroot \
-        xz-utils \
-        bc \
-        vim-tiny \
         net-tools \
         git \
         gawk \
@@ -57,25 +54,14 @@ RUN echo 1234 | sudo -S apt update && \
         python-numpy \
         nginx \
         tigervnc-standalone-server \
-        vlc \
         less \
         qemu \
-        zip \
-        unzip \
         openssh-server \
         p7zip-rar \
         p7zip-full \
         x11-xserver-utils \
         xdotool \
         x11-apps \
-        x11-utils \
-        firefox \
-        vlc \
-        # ark is used instead
-        #file-roller \
-        transmission-qt \
-        # qpdfview is used instead
-        #evince \
         golang-go \
         ffmpeg \
         python3-pip \
@@ -83,6 +69,21 @@ RUN echo 1234 | sudo -S apt update && \
         ./megacmd-xUbuntu_20.04_amd64.deb \
         ./zoom_amd64.deb \
         kazam \
+        # installed by lubuntu-desktop
+        #x11-utils \
+        #bc \
+        #firefox \
+        #transmission-qt \
+        #vlc \
+        #xz-utils \
+        #zip \
+        #unzip \
+        # vim installed already
+        #vim-tiny \
+        # ark is used instead
+        #file-roller \
+        # qpdfview is used instead
+        #evince \
         # for utorrent server
         ./libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb ./libssl1.0-dev_1.0.2n-1ubuntu6.2_amd64.deb \
         #./libssl1.0.0_1.0.2n-1ubuntu6.2_i386.deb ./libssl1.0-dev_1.0.2n-1ubuntu6.2_i386.deb \
