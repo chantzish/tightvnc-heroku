@@ -33,13 +33,14 @@ RUN echo 1234 | sudo -S apt update && \
     sudo apt-add-repository universe && \
     # try fix utorrent
     #sudo add-apt-repository ppa:ubuntu-security-proposed/ppa && \
-    sudo apt update && \
-    sudo apt install -y --install-recommends winehq-devel && \
+    echo 1234 | sudo -S apt update && \
+    echo 1234 | sudo -S apt install -y --install-recommends winehq-devel && \
     # prevent gdm3 from installing as dependency of lubuntu-desktop
-    sudo apt install -y lxqt-notificationd && \
-    sudo apt install -y \
+    echo 1234 | sudo -S apt install -y lxqt-notificationd && \
+    echo 1234 | sudo -S apt install -y \
         heroku \
-        lubuntu-desktop \
+        #lubuntu-desktop \
+        tasksel \
         curl \
         binutils \
         build-essential \
@@ -99,6 +100,7 @@ RUN echo 1234 | sudo -S apt update && \
         #openjdk-8-jdk \
         #fonts-liberation libappindicator1 \
         && \
+    echo 1234 | sudo -S tasksel install lubuntu-desktop
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
     chmod 700 ~/.ssh && \
