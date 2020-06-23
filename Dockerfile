@@ -100,8 +100,8 @@ RUN echo 1234 | sudo -S apt update && \
         #openjdk-8-jdk \
         #fonts-liberation libappindicator1 \
         && \
-    echo 1234 | sudo -S tasksel install lubuntu-desktop
-    sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
+    echo 1234 | sudo -S tasksel install lubuntu-desktop && \
+    echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
     chmod 700 ~/.ssh && \
     sudo git clone https://github.com/novnc/noVNC.git /opt/noVNC && \
