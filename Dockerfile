@@ -100,7 +100,11 @@ RUN echo 1234 | sudo -S apt update && \
         #openjdk-8-jdk \
         #fonts-liberation libappindicator1 \
         && \
-    echo 1234 | sudo -S tasksel install lubuntu-desktop && \
+    echo '################################################################################################################################################################' && \
+    echo '                                                             start tastksel install lubuntu-desktop                                                             ' && \
+    echo '################################################################################################################################################################' && \
+    #echo 1234 | sudo -S tasksel install lubuntu-desktop && \
+    echo 1234 | sudo -S python -c 'import pty; pty.spawn(["/usr/bin/tasksel", "install", "lubuntu-desktop"])' && \
     echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
     chmod 700 ~/.ssh && \
