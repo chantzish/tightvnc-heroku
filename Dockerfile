@@ -104,7 +104,10 @@ RUN echo 1234 | sudo -S apt update && \
     echo '                                                             start tastksel install lubuntu-desktop                                                             ' && \
     echo '################################################################################################################################################################' && \
     #echo 1234 | sudo -S tasksel install lubuntu-desktop && \
-    echo 1234 | sudo -S python -c 'import pty; pty.spawn(["/usr/bin/tasksel", "install", "lubuntu-desktop"])' && \
+    echo 1234 | sudo -S mv /usr/bin/debconf-apt-progress /usr/bin/debconf-apt-progress-old && \
+    echo '#!/bin/sh\n\nshift;$@' | sudo tee /usr/bin/debconf-apt-progress && \
+    sudo chmod +x /usr/bin/debconf-apt-progress && \
+    sudo python -c 'import pty; pty.spawn(["/usr/bin/tasksel", "install", "lubuntu-desktop"])' && \
     echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     mkdir .ssh && \
     chmod 700 ~/.ssh && \
