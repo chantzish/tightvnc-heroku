@@ -1,8 +1,13 @@
 FROM ubuntu
 RUN apt update && apt install -y sudo && useradd -D -s /bin/bash && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | passwd user
-USER user
+USER 1000
 WORKDIR /home/user
 ENV LANG=en_US.UTF-8
+ENV SHELL=/usr/bin/bash
+ENV HOME=/home/user
+ENV USER=user
+ENV PORT=3000
+EXPOSE 3000/tcp
 COPY apt-xapian-index_999.002_all.deb /home/user/apt-xapian-index_999.002_all.deb
 RUN echo 1234 | sudo -S apt update && \
     # prevent sudo error message
@@ -119,6 +124,7 @@ RUN echo 1234 | sudo -S apt update && \
     #echo export JAVA_HOME=/usr/lib/jvm/default-java >> .profile && \
     echo export LANG=en_US.UTF-8 >> .profile && \
     echo export HOME=/home/user >> .profile && \
+    echo export SHELL=/usr/bin/bash >> .profile && \
     echo export PATH=\"\$PATH:/home/user/.local/bin:/usr/games:/usr/local/games\" >> .profile && \
     sudo sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/autostart/nm-applet.desktop && \
     sudo sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/autostart/nm-tray-autostart.desktop && \
