@@ -4,6 +4,7 @@ export HOME=/home/user
 export USER=`whoami`
 export LANG=en_US.UTF-8
 export PATH="$PATH:/home/user/.local/bin:/usr/games:/usr/local/games"
+export SHELL=/usr/bin/bash
 #xsetroot -solid grey
 #x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
 #x-window-manager &
