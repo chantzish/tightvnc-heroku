@@ -17,8 +17,9 @@ chmod 600 ~/.ssh/authorized_keys
 
 cd /home/user
 # fix according to site
-echo '#!/bin/sh\n\nwhile :; do wget '$APP_NAME'.herokuapp.com -q -O /dev/null -o /dev/null; sleep 4m; done &' | tee /usr/local/sbin/stop.sh
-chmod +x /usr/local/sbin/stop.sh
+if [ ! -d "/home/user/.local/bin" ]; then mkdir -p /home/user/.local/bin; fi
+echo '#!/bin/sh\n\nwhile :; do wget '$APP_NAME'.herokuapp.com -q -O /dev/null -o /dev/null; sleep 4m; done &' | tee /home/user/.local/bin/stop.sh
+chmod +x /home/user/.local/bin/stop.sh
 
 #mkdir -m 1777 /tmp/.X11-unix
 #mkdir .vnc
@@ -34,7 +35,7 @@ sed -i 's/const ClientId = ".*.apps.googleusercontent.com"/const ClientId = "'"$
 sed -i 's/const ClientSecret = ".*"/const ClientSecret = "'"$GDRIVE_CLIENT_SECRET"'"/' handlers_drive.go
 #go get github.com/prasmussen/gdrive
 go build -ldflags '-w -s'
-cp gdrive /usr/local/sbin/gdrive
+cp gdrive /home/user/.local/bin/gdrive
 cd ..
 printf "%s" "$GDRIVE_TOKEN" > .gdrive/token_v2.json
 gdrive download $TELEGRAM_LOCAL
