@@ -135,7 +135,9 @@ RUN echo 1234 | sudo -S apt update && \
     sudo sed -i 's/#Port 22/Port 2200/' /etc/ssh/sshd_config && \
     echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     echo 1234 | sudo -S sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config && \
-    sudo sed -i 's/640/690/' /etc/xdg/xdg-Lubuntu/pcmanfm-qt/lxqt/settings.conf && \
+    sudo sed -i 's/ShowHidden=false/ShowHidden=true/' /etc/xdg/xdg-Lubuntu/pcmanfm-qt/lxqt/settings.conf && \
+    sudo sed -i 's/SplitterPos=275/SplitterPos=150/' /etc/xdg/xdg-Lubuntu/pcmanfm-qt/lxqt/settings.conf && \
+    sudo sed -i 's/Width=640/Width=700\nLastWindowHeight=480\nLastWindowMaximized=false\nLastWindowWidth=700/' /etc/xdg/xdg-Lubuntu/pcmanfm-qt/lxqt/settings.conf && \
     echo 1234 | sudo -S useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | sudo passwd user
 USER 1000
 WORKDIR /home/user
