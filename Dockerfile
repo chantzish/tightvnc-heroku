@@ -1,15 +1,16 @@
 FROM ubuntu
-RUN apt update && apt install -y sudo && useradd -D -s /bin/bash && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | passwd user
-USER 1000
-WORKDIR /home/user
+RUN apt update && apt install -y sudo && useradd -D -s /bin/bash && useradd -u 1001 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m useri && yes "1234" | passwd useri
+USER 1001
+WORKDIR /home/useri
 ENV LANG=en_US.UTF-8
 ENV SHELL=/usr/bin/bash
-ENV HOME=/home/user
-ENV USER=user
+ENV HOME=/home/useri
+ENV USER=useri
 ENV PORT=3000
 EXPOSE 3000/tcp
-COPY apt-xapian-index_999.002_all.deb /home/user/apt-xapian-index_999.002_all.deb
+COPY apt-xapian-index_999.002_all.deb /home/useri/apt-xapian-index_999.002_all.deb
 RUN echo 1234 | sudo -S apt update && \
+    echo 1234 | sudo -S chown 1001:1001 /home/useri/apt-xapian-index_999.002_all.deb && \
     # prevent sudo error message
     echo "Set disable_coredump false" | sudo tee /etc/sudo.conf && \
     # some basic packages and special non interactive
@@ -114,19 +115,7 @@ RUN echo 1234 | sudo -S apt update && \
     echo 1234 | sudo -S sed -i 's:if (-x "/usr/bin/debconf-apt-progress"):if (0 \&\& -x "/usr/bin/debconf-apt-progress"):' /usr/bin/tasksel && \
     sudo tasksel install lubuntu-desktop && \
     # sudo python -c 'import pty; pty.spawn(["/usr/bin/tasksel", "install", "lubuntu-desktop"])' && \
-    echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
-    mkdir .ssh && \
-    chmod 700 ~/.ssh && \
-    sudo git clone https://github.com/novnc/noVNC.git /opt/noVNC && \
-    sudo git clone https://github.com/novnc/websockify /opt/noVNC/utils/websockify && \
-    sudo sed -i 's/${WEBSOCKIFY} ${SSLONLY} --web ${WEB}/${WEBSOCKIFY} ${SSLONLY} --heartbeat=45 --web ${WEB}/' /opt/noVNC/utils/launch.sh && \
-    sudo sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config && \
-    #echo export JAVA_HOME=/usr/lib/jvm/default-java >> .profile && \
-    echo export LANG=en_US.UTF-8 >> .profile && \
-    echo export HOME=/home/user >> .profile && \
-    echo export SHELL=/usr/bin/bash >> .profile && \
-    echo export PATH=\"\$PATH:/home/user/.local/bin:/usr/games:/usr/local/games\" >> .profile && \
-    sudo sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/autostart/nm-applet.desktop && \
+    echo 1234 | sudo -S sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/autostart/nm-applet.desktop && \
     sudo sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/autostart/nm-tray-autostart.desktop && \
     echo "NotShowIn=LXQt;" | sudo tee -a /etc/xdg/autostart/upg-notifier-autostart.desktop && \
     sudo sed -i 's/OnlyShowIn=LXQt/NotShowIn=LXQt/' /etc/xdg/autostart/lxqt-xscreensaver-autostart.desktop && \
@@ -141,11 +130,32 @@ RUN echo 1234 | sudo -S apt update && \
     echo "#MACs +hmac-sha1" | sudo tee -a /etc/ssh/sshd_config && \
     echo Ciphers +aes128-cbc | sudo tee -a /etc/ssh/sshd_config && \
     sudo sed -i 's/#Port 22/Port 2200/' /etc/ssh/sshd_config && \
+    echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
+    echo 1234 | sudo -S sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config && \
+    echo 1234 | sudo -S useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | sudo passwd user
+USER 1000
+WORKDIR /home/user
+ENV LANG=en_US.UTF-8
+ENV SHELL=/usr/bin/bash
+ENV HOME=/home/user
+ENV USER=user
+ENV PORT=3000
+EXPOSE 3000/tcp
+RUN mkdir .ssh && \
+    chmod 700 ~/.ssh && \
+    echo 1234 | sudo -S git clone https://github.com/novnc/noVNC.git /opt/noVNC && \
+    sudo git clone https://github.com/novnc/websockify /opt/noVNC/utils/websockify && \
+    sudo sed -i 's/${WEBSOCKIFY} ${SSLONLY} --web ${WEB}/${WEBSOCKIFY} ${SSLONLY} --heartbeat=45 --web ${WEB}/' /opt/noVNC/utils/launch.sh && \
+    #echo export JAVA_HOME=/usr/lib/jvm/default-java >> .profile && \
+    echo export LANG=en_US.UTF-8 >> .profile && \
+    echo export HOME=/home/user >> .profile && \
+    echo export SHELL=/usr/bin/bash >> .profile && \
+    echo export PATH=\"\$PATH:/home/user/.local/bin:/usr/games:/usr/local/games\" >> .profile && \
     wget https://github.com/novnc/websockify/raw/master/websockify/websocket.py && \
     wget https://github.com/chantzish/python-dewebsockify/raw/master/dewebsockify.py && \
     wget -O- https://telegram.org/dl/desktop/linux | sudo tar xJ -C /opt/ && \
     sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && \
-    sudo chown -R user:user /opt && \
+    sudo chown -R 1000:1000 /opt && \
     sudo chmod 755 -R /opt && \
     heroku version && \
     git clone https://github.com/gdrive-org/gdrive.git && \
@@ -175,7 +185,14 @@ RUN echo 1234 | sudo -S apt update && \
     mkdir /opt/noVNC/user && \
     mkdir /opt/noVNC/gui && \
     heroku plugins:install heroku-builds && \
-    sudo rm /var/lib/dpkg/statoverride
+    sudo rm /var/lib/dpkg/statoverride && \
+    if [ ! -d ".vnc" ]; then mkdir .vnc; fi && \
+    echo 1234 | sudo -S chown -R 1000:1000 /etc/ssh && \
+    # echo 1234 | sudo -S chmod -R 600 /etc/ssh/ssh_config.d/ && \
+    echo 1234 | sudo -S chown -R 1000:1000 /etc/ssh /usr/lib/openssh /usr/share/openssh /etc/nginx /usr/lib/nginx /usr/share/nginx /var/lib/nginx /var/log/nginx /var/www && \
+    echo 1234 | sudo -S chown 1000:1000 /etc/logrotate.d/nginx && \
+    echo 1234 | sudo -S chmod a+w /run && \
+    if [ ! -d ".local/bin" ]; then mkdir -p .local/bin; fi
 COPY heroku.yml /home/user/heroku.yml
 COPY settings.dat /opt/utorrent-server-alpha-v3_3/settings.dat
 COPY xstartup /home/user/.vnc/xstartup
@@ -183,4 +200,6 @@ COPY nginx.template /home/user/nginx.template
 COPY launch.sh /home/user/launch.sh
 COPY launch-gui.sh /home/user/launch-gui.sh
 COPY Dockerfile /home/user/Dockerfile
+RUN echo 1234 | sudo -S chown 1000:1000 heroku.yml .vnc/xstartup nginx.template launch.sh launch-gui.sh Dockerfile /opt/utorrent-server-alpha-v3_3/settings.dat && \
+    chmod +x launch.sh launch-gui.sh .vnc/xstartup
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
