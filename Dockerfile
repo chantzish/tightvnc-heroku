@@ -76,6 +76,8 @@ RUN echo 1234 | sudo -S apt update && \
         ./megacmd-xUbuntu_20.04_amd64.deb \
         ./zoom_amd64.deb \
         kazam \
+        # fix problem in opening scripts from pcmanfm-qt
+        xterm \
         # installed by lubuntu-desktop
         #x11-utils \
         #bc \
