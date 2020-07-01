@@ -115,6 +115,7 @@ RUN echo 1234 | sudo -S apt update && \
     echo 1234 | sudo -S sed -i 's:if (-x "/usr/bin/debconf-apt-progress"):if (0 \&\& -x "/usr/bin/debconf-apt-progress"):' /usr/bin/tasksel && \
     sudo tasksel install lubuntu-desktop && \
     # sudo python -c 'import pty; pty.spawn(["/usr/bin/tasksel", "install", "lubuntu-desktop"])' && \
+    echo 1234 | sudo -S sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/xdg-Lubuntu/autostart/nm-applet.desktop && \
     echo 1234 | sudo -S sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/autostart/nm-applet.desktop && \
     sudo sed -i 's/NotShowIn=/NotShowIn=LXQt;/' /etc/xdg/autostart/nm-tray-autostart.desktop && \
     echo "NotShowIn=LXQt;" | sudo tee -a /etc/xdg/autostart/upg-notifier-autostart.desktop && \
@@ -192,7 +193,10 @@ RUN mkdir .ssh && \
     echo 1234 | sudo -S chown -R 1000:1000 /etc/ssh /usr/lib/openssh /usr/share/openssh /etc/nginx /usr/lib/nginx /usr/share/nginx /var/lib/nginx /var/log/nginx /var/www && \
     echo 1234 | sudo -S chown 1000:1000 /etc/logrotate.d/nginx && \
     echo 1234 | sudo -S chmod a+w /run && \
-    if [ ! -d ".local/bin" ]; then mkdir -p .local/bin; fi
+    if [ ! -d ".local/bin" ]; then mkdir -p .local/bin; fi && \
+    if [ ! -d ".config" ]; then mkdir .config; fi && \
+    echo 1234 | sudo -S cp -R /etc/xdg/xdg-Lubuntu/* .config/ && \
+    echo 1234 | sudo -S chown -R 1000:1000 .config
 COPY heroku.yml /home/user/heroku.yml
 COPY settings.dat /opt/utorrent-server-alpha-v3_3/settings.dat
 COPY xstartup /home/user/.vnc/xstartup
