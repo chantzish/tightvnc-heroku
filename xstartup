@@ -18,3 +18,4 @@ touch /home/user/.config/pulse/cookie
 chmod 600 /home/user/.config/pulse/cookie
 pulseaudio --daemonize=yes
 env LXQT_DEFAULT_OPENBOX_CONFIG="/etc/xdg/xdg-Lubuntu/openbox/lxqt-rc.xml" /usr/bin/startlxqt &
+vs-install.sh

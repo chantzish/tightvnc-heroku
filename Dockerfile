@@ -217,6 +217,9 @@ COPY nginx.template /home/user/nginx.template
 COPY launch.sh /home/user/launch.sh
 COPY launch-gui.sh /home/user/launch-gui.sh
 COPY Dockerfile /home/user/Dockerfile
-RUN echo 1234 | sudo -S chown 1000:1000 heroku.yml .vnc/xstartup nginx.template launch.sh launch-gui.sh Dockerfile /opt/utorrent-server-alpha-v3_3/settings.dat && \
-    chmod +x launch.sh launch-gui.sh .vnc/xstartup
+COPY VS98ENT.STF /home/user/VS98ENT.STF
+COPY vs-install.sh /home/user/vs-install.sh
+COPY fix-heroku.sh /home/user/fix-heroku.sh
+RUN echo 1234 | sudo -S chown 1000:1000 heroku.yml .vnc/xstartup nginx.template launch.sh launch-gui.sh Dockerfile /opt/utorrent-server-alpha-v3_3/settings.dat vs-install.sh VS98ENT.STF && \
+    chmod +x launch.sh launch-gui.sh .vnc/xstartup vs-install.sh fix-heroku.sh
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
