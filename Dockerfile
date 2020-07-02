@@ -205,6 +205,7 @@ RUN echo 1234 | sudo -S apt update && \
     heroku plugins:install heroku-builds && \
     echo '[MySQL]\nDriver=/usr/lib/x86_64-linux-gnu/odbc/libmaodbc.so\nUsageCount=1' | sudo tee /etc/odbcinst.ini && \
     echo '[MySQL-test]\nDescription     = MySQL database test\nDriver          = MySQL\nServer          = localhost\nDatabase        = test\nPort            = 3306\nSocket          = /var/run/mysqld/mysqld.sock\nOption          =\nStmt            =\nUser            = root\nPassword        = ' | sudo tee /etc/odbc.ini && \
+    sudo sed -i 's/install -m 755 -o mysql -g root/install -m 755/' /etc/init.d/mysql && \
     sudo rm /var/lib/dpkg/statoverride && \
     if [ ! -d ".vnc" ]; then mkdir .vnc; fi && \
     echo 1234 | sudo -S chown -R 1000:1000 /etc/ssh && \
