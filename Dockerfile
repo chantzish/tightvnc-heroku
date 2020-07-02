@@ -26,6 +26,8 @@ RUN echo 1234 | sudo -S apt update && \
     # manual addition packages
     echo "deb https://cli-assets.heroku.com/apt ./" | sudo tee /etc/apt/sources.list.d/heroku.list && \
     curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
+    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add - && \
+    sudo curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list -o /etc/apt/sources.list.d/mssql-release.list && \
     wget https://zoom.us/client/latest/zoom_amd64.deb && \
     wget https://mega.nz/linux/MEGAsync/xUbuntu_20.04/amd64/megacmd-xUbuntu_20.04_amd64.deb && \
     wget 'https://launchpad.net/~ubuntu-security-proposed/+archive/ubuntu/ppa/+build/16429988/+files/libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb' && \
@@ -43,7 +45,11 @@ RUN echo 1234 | sudo -S apt update && \
     echo 1234 | sudo -S apt install -y --install-recommends winehq-devel && \
     # prevent gdm3 from installing as dependency of lubuntu-desktop
     echo 1234 | sudo -S apt install -y lxqt-notificationd && \
+    sudo ACCEPT_EULA=Y apt install -y \
+        #mssql-tools \
+        msodbcsql17 &&\
     echo 1234 | sudo -S apt install -y \
+        unixodbc-dev \
         heroku \
         #lubuntu-desktop \
         tasksel \
