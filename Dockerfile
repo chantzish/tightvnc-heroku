@@ -26,8 +26,8 @@ RUN echo 1234 | sudo -S apt update && \
     # manual addition packages
     echo "deb https://cli-assets.heroku.com/apt ./" | sudo tee /etc/apt/sources.list.d/heroku.list && \
     curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add - && \
-    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add - && \
-    sudo curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list -o /etc/apt/sources.list.d/mssql-release.list && \
+    #curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add - && \
+    #sudo curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list -o /etc/apt/sources.list.d/mssql-release.list && \
     wget https://zoom.us/client/latest/zoom_amd64.deb && \
     wget https://mega.nz/linux/MEGAsync/xUbuntu_20.04/amd64/megacmd-xUbuntu_20.04_amd64.deb && \
     wget 'https://launchpad.net/~ubuntu-security-proposed/+archive/ubuntu/ppa/+build/16429988/+files/libssl1.0.0_1.0.2n-1ubuntu6.2_amd64.deb' && \
@@ -45,10 +45,13 @@ RUN echo 1234 | sudo -S apt update && \
     echo 1234 | sudo -S apt install -y --install-recommends winehq-devel && \
     # prevent gdm3 from installing as dependency of lubuntu-desktop
     echo 1234 | sudo -S apt install -y lxqt-notificationd && \
-    sudo ACCEPT_EULA=Y apt install -y \
+    #sudo ACCEPT_EULA=Y apt install -y \
         #mssql-tools \
-        msodbcsql17 &&\
+        #msodbcsql17 &&\
     echo 1234 | sudo -S apt install -y \
+        mariadb-server \
+        unixodbc \
+        odbc-mariadb \
         unixodbc-dev \
         heroku \
         #lubuntu-desktop \
@@ -106,13 +109,15 @@ RUN echo 1234 | sudo -S apt update && \
         # for debconf-get-selections for not interactive apt/dpkg install
         #debconf-utils \
         # lower image size
-        winbind \
-        #samba \
         #thunderbird \
         #virtualenv \
         #default-jdk \
         #openjdk-8-jdk \
         #fonts-liberation libappindicator1 \
+        # pev is a program to view windows exe properties from linux
+        pev \
+        winbind \
+        #samba \
         && \
     echo '#############################################################################################################################' && \
     echo '                                           start tastksel install lubuntu-desktop                                            ' && \
@@ -198,6 +203,8 @@ RUN echo 1234 | sudo -S apt update && \
     mkdir /opt/noVNC/user && \
     mkdir /opt/noVNC/gui && \
     heroku plugins:install heroku-builds && \
+    echo '[MySQL]\nDriver=/usr/lib/x86_64-linux-gnu/odbc/libmaodbc.so\nUsageCount=1' | sudo tee /etc/odbcinst.ini && \
+    echo '[MySQL-test]\nDescription     = MySQL database test\nDriver          = MySQL\nServer          = localhost\nDatabase        = test\nPort            = 3306\nSocket          = /var/run/mysqld/mysqld.sock\nOption          =\nStmt            =\nUser            = root\nPassword        = ' | sudo tee /etc/odbc.ini && \
     sudo rm /var/lib/dpkg/statoverride && \
     if [ ! -d ".vnc" ]; then mkdir .vnc; fi && \
     echo 1234 | sudo -S chown -R 1000:1000 /etc/ssh && \
@@ -220,6 +227,7 @@ COPY Dockerfile /home/user/Dockerfile
 COPY VS98ENT.STF /home/user/VS98ENT.STF
 COPY vs-install.sh /home/user/vs-install.sh
 COPY fix-heroku.sh /home/user/fix-heroku.sh
-RUN echo 1234 | sudo -S chown 1000:1000 heroku.yml .vnc/xstartup nginx.template launch.sh launch-gui.sh Dockerfile /opt/utorrent-server-alpha-v3_3/settings.dat vs-install.sh VS98ENT.STF && \
-    chmod +x launch.sh launch-gui.sh .vnc/xstartup vs-install.sh fix-heroku.sh
+COPY mariadb.sh /home/user/mariadb.sh
+RUN echo 1234 | sudo -S chown 1000:1000 heroku.yml .vnc/xstartup nginx.template launch.sh launch-gui.sh Dockerfile /opt/utorrent-server-alpha-v3_3/settings.dat vs-install.sh VS98ENT.STF mariadb.sh && \
+    chmod +x launch.sh launch-gui.sh .vnc/xstartup vs-install.sh fix-heroku.sh mariadb.sh
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
