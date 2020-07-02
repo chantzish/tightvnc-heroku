@@ -1,16 +1,16 @@
 FROM ubuntu
-RUN apt update && apt install -y sudo && useradd -D -s /bin/bash && useradd -u 1001 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m useri && yes "1234" | passwd useri
-USER 1001
-WORKDIR /home/useri
+RUN apt update && apt install -y sudo && useradd -D -s /bin/bash && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | passwd user
+USER 1000
+WORKDIR /home/user
 ENV LANG=en_US.UTF-8
 ENV SHELL=/usr/bin/bash
-ENV HOME=/home/useri
-ENV USER=useri
+ENV HOME=/home/user
+ENV USER=user
 ENV PORT=3000
 EXPOSE 3000/tcp
-COPY apt-xapian-index_999.002_all.deb /home/useri/apt-xapian-index_999.002_all.deb
+COPY apt-xapian-index_999.002_all.deb /home/user/apt-xapian-index_999.002_all.deb
 RUN echo 1234 | sudo -S apt update && \
-    echo 1234 | sudo -S chown 1001:1001 /home/useri/apt-xapian-index_999.002_all.deb && \
+    echo 1234 | sudo -S chown 1000:1000 /home/user/apt-xapian-index_999.002_all.deb && \
     # prevent sudo error message
     echo "Set disable_coredump false" | sudo tee /etc/sudo.conf && \
     # some basic packages and special non interactive
@@ -100,7 +100,7 @@ RUN echo 1234 | sudo -S apt update && \
         # for debconf-get-selections for not interactive apt/dpkg install
         #debconf-utils \
         # lower image size
-        #winbind \
+        winbind \
         #samba \
         #thunderbird \
         #virtualenv \
@@ -138,16 +138,17 @@ RUN echo 1234 | sudo -S apt update && \
     sudo sed -i 's/ShowHidden=false/ShowHidden=true/' /etc/xdg/xdg-Lubuntu/pcmanfm-qt/lxqt/settings.conf && \
     sudo sed -i 's/SplitterPos=275/SplitterPos=150/' /etc/xdg/xdg-Lubuntu/pcmanfm-qt/lxqt/settings.conf && \
     sudo sed -i 's/Width=640/Width=700\nLastWindowHeight=480\nLastWindowMaximized=false\nLastWindowWidth=700/' /etc/xdg/xdg-Lubuntu/pcmanfm-qt/lxqt/settings.conf && \
-    echo 1234 | sudo -S useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | sudo passwd user
-USER 1000
-WORKDIR /home/user
-ENV LANG=en_US.UTF-8
-ENV SHELL=/usr/bin/bash
-ENV HOME=/home/user
-ENV USER=user
-ENV PORT=3000
-EXPOSE 3000/tcp
-RUN mkdir .ssh && \
+    #echo 1234 | sudo -S useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | sudo passwd user
+#USER 1000
+#WORKDIR /home/user
+#ENV LANG=en_US.UTF-8
+#ENV SHELL=/usr/bin/bash
+#ENV HOME=/home/user
+#ENV USER=user
+#ENV PORT=3000
+#EXPOSE 3000/tcp
+#RUN 
+    mkdir .ssh && \
     chmod 700 ~/.ssh && \
     echo 1234 | sudo -S git clone https://github.com/novnc/noVNC.git /opt/noVNC && \
     sudo git clone https://github.com/novnc/websockify /opt/noVNC/utils/websockify && \
