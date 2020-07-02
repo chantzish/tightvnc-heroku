@@ -12,10 +12,14 @@ export SHELL=/usr/bin/bash
 #export XKL_XMODMAP_DISABLE=1
 #export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/
 #/usr/bin/lxsession -s Lubuntu &
+cd /home/user
 vncconfig -nowin &
 mkdir -p /home/user/.config/pulse
 touch /home/user/.config/pulse/cookie
 chmod 600 /home/user/.config/pulse/cookie
 pulseaudio --daemonize=yes
 env LXQT_DEFAULT_OPENBOX_CONFIG="/etc/xdg/xdg-Lubuntu/openbox/lxqt-rc.xml" /usr/bin/startlxqt &
-vs-install.sh
+sleep 30s
+cd /home/user
+echo "----- starting visual studio install -----"
+vs-install.sh &
