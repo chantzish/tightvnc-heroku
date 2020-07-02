@@ -199,6 +199,7 @@ RUN mkdir .ssh && \
     echo 1234 | sudo -S chown 1000:1000 /etc/logrotate.d/nginx && \
     echo 1234 | sudo -S chmod a+w /run && \
     if [ ! -d ".local/bin" ]; then mkdir -p .local/bin; fi && \
+    sudo mkdir /tmp/.X11-unix && \
     if [ ! -d ".config" ]; then mkdir .config; fi && \
     echo 1234 | sudo -S cp -R /etc/xdg/xdg-Lubuntu/* .config/ && \
     echo 1234 | sudo -S chown -R 1000:1000 .config
