@@ -9,11 +9,11 @@ COPY launch.sh /home/user/launch.sh
 COPY launch-gui.sh /home/user/launch-gui.sh
 COPY Dockerfile /home/user/Dockerfile
 COPY appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop /home/user/.local/share/applications/appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop
-COPY userapp-Telegram* /home/user/.local/share/applications/
+COPY userapp-Telegram\\ Desktop-0OX5L1.desktop /home/user/.local/share/applications/userapp-Telegram\\ Desktop-0OX5L1.desktop
 RUN export LANG=en_US.UTF-8 && \
     echo 1234 | sudo -S apt update && \
     echo "Set disable_coredump false" | sudo tee /etc/sudo.conf && \
-    echo 1234 | sudo -S chown 1000:1000 heroku.yml nginx.template launch.sh launch-gui.sh Dockerfile /home/user/.local/share/applications/userapp-Telegram Desktop-0OX5L1.desktop /home/user/.local/share/applications/appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop && \
+    echo 1234 | sudo -S chown 1000:1000 heroku.yml nginx.template launch.sh launch-gui.sh Dockerfile "/home/user/.local/share/applications/userapp-Telegram Desktop-0OX5L1.desktop" /home/user/.local/share/applications/appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop && \
     chmod +x launch.sh launch-gui.sh && \
     echo 1234 | sudo -S DEBIAN_FRONTEND=noninteractive apt install -y keyboard-configuration locales tzdata && \
     echo 1234 | sudo -S apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg software-properties-common lsb-release && \
