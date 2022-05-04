@@ -160,8 +160,11 @@ RUN export LANG=en_US.UTF-8 && \
     echo 1234 | sudo -S chown -R 1000:1000 /opt && \
     echo 1234 | sudo -S chmod 755 -R /opt && \
     sudo wget "https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64" -O /usr/local/sbin/gdrive && \
-    sudo chmod +x /usr/local/sbin/gdrive && \
+    git clone https://github.com/gdrive-org/gdrive.git && \
     mkdir .gdrive && \
+    cd gdrive && \
+    go get github.com/prasmussen/gdrive && \
+    cd .. && \
     git clone https://github.com/chantzish/dewebsockify.git && \
     echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
     sudo sed -i 's/worker_processes .*;/worker_processes 1;/' /etc/nginx/nginx.conf && \
