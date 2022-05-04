@@ -156,15 +156,31 @@ RUN export LANG=en_US.UTF-8 && \
     if [ ! -d ".vnc" ]; then mkdir -p .vnc; fi && \
     chmod 700 ~/.vnc && \
     if [ ! -d ".local/bin" ]; then mkdir -p .local/bin; fi && \
-    wget -O- https://telegram.org/dl/desktop/linux | sudo tar xJ -C /opt/ && \
+    wget -q -O- https://telegram.org/dl/desktop/linux | sudo tar xJ -C /opt/ && \
     echo 1234 | sudo -S ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && \
     echo 1234 | sudo -S chown -R 1000:1000 /opt && \
     echo 1234 | sudo -S chmod 755 -R /opt && \
     mkdir .gdrive && \
-    go get github.com/prasmussen/gdrive && \
+    #go get github.com/prasmussen/gdrive && \
     git clone https://github.com/chantzish/dewebsockify.git && \
     echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
     sudo sed -i 's/worker_processes .*;/worker_processes 1;/' /etc/nginx/nginx.conf && \
     sudo sed -i 's/user www-data;//' /etc/nginx/nginx.conf && \
-    sudo mkdir /tmp/.X11-unix
+    sudo mkdir /tmp/.X11-unix && \
+    # special addition
+    mkdir workspace && \
+    cd workspace &&  \
+    wget -q https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.6.3.0cmake1/qpdf-10.6.3.0cmake1.tar.gz && \
+    tar xf qpdf-10.6.3.0cmake1.tar.gz && \
+    cd qpdf-10.6.3/ && \
+    cmake -S . -B build && \
+    cmake --build build &&\
+    sudo cmake --install build && \
+    sudo ldconfig && \
+    mkdir -p ~/Downloads/Telegram\ Desktop && \
+    cd ~/Downloads/Telegram\ Desktop && \
+    python3.8 -m venv env && \
+    source env/bin/activate && \
+    pip install wheel && \
+    pip install https://github.com/chantzish/pikepdf.git
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
