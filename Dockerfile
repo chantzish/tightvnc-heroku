@@ -180,7 +180,8 @@ RUN export LANG=en_US.UTF-8 && \
     mkdir -p ~/Downloads/Telegram\ Desktop && \
     cd ~/Downloads/Telegram\ Desktop && \
     python3.8 -m venv env && \
-    source env/bin/activate && \
+    . env/bin/activate && \
     pip install wheel && \
-    pip install https://github.com/chantzish/pikepdf.git
+    pip install https://github.com/chantzish/pikepdf.git && \
+    deactivate
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
