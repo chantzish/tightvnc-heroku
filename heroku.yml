@@ -1,3 +1,13 @@
 build:
   docker:
     web: Dockerfile
+  config:
+    FOO: bar
+    GIT_CONF: |
+      [user]
+      	email = chantzish@gmail.com
+      	name = chantzish
+      [credential]
+      	helper = store
+      [color]
+      	ui = auto
