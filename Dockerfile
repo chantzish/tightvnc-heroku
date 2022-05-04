@@ -177,11 +177,13 @@ RUN export LANG=en_US.UTF-8 && \
     cmake --build build &&\
     sudo cmake --install build && \
     sudo ldconfig && \
+    cd ~ && \
+    rm -rf workspace && \
     mkdir -p ~/Downloads/Telegram\ Desktop && \
     cd ~/Downloads/Telegram\ Desktop && \
     python3.8 -m venv env && \
     . env/bin/activate && \
     pip install wheel && \
-    pip install https://github.com/chantzish/pikepdf.git && \
+    pip install git+https://github.com/chantzish/pikepdf.git && \
     deactivate
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
