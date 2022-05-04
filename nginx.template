@@ -63,6 +63,11 @@ server {
 		proxy_buffering off;
 	}
 
+	location /user/ {
+		root /home;
+		autoindex on;
+	}
+
 	location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
