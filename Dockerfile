@@ -9,7 +9,7 @@ COPY launch.sh /home/user/launch.sh
 COPY launch-gui.sh /home/user/launch-gui.sh
 COPY Dockerfile /home/user/Dockerfile
 COPY appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop /home/user/.local/share/applications/appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop
-COPY [userapp-Telegram Desktop-0OX5L1.desktop] /home/user/.local/share/applications/[userapp-Telegram\ Desktop-0OX5L1.desktop]
+COPY []userapp-Telegram Desktop-0OX5L1.desktop] /home/user/.local/share/applications/[]userapp-Telegram\ Desktop-0OX5L1.desktop]
 RUN export LANG=en_US.UTF-8 && \
     echo 1234 | sudo -S apt update && \
     echo "Set disable_coredump false" | sudo tee /etc/sudo.conf && \
