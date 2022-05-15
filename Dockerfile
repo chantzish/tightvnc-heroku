@@ -125,6 +125,7 @@ RUN export LANG=en_US.UTF-8 && \
         ffmpeg \
         openjdk-8-jdk \
         cabextract \
+        xdg-user-dirs-gtk \
         # for kazam
         python3-xlib \
         python3-cairo \
@@ -137,7 +138,7 @@ RUN export LANG=en_US.UTF-8 && \
     wget https://github.com/chantzish/python-dewebsockify/raw/master/dewebsockify.py && \
     echo 1234 | sudo -S sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config && \
     echo 1234 | sudo -S sed -i 's/NotShowIn=/NotShowIn=LXDE;/' /etc/xdg/autostart/update-notifier.desktop && \
-    echo 1234 | sudo -S sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nNotShowIn=LXDE;/' /etc/xdg/autostart/xdg-user-dirs.desktop && \
+    #echo 1234 | sudo -S sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nNotShowIn=LXDE;/' /etc/xdg/autostart/xdg-user-dirs.desktop && \
     echo 1234 | sudo -S sed -i 's/NotShowIn=/NotShowIn=LXDE;/' /etc/xdg/autostart/nm-applet.desktop && \
     (echo 1234 | sudo -S sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties || true) && \
     echo 1234 | sudo -S sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
