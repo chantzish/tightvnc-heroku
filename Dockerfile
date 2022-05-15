@@ -170,6 +170,7 @@ RUN export LANG=en_US.UTF-8 && \
     sudo sed -i 's/user www-data;//' /etc/nginx/nginx.conf && \
     sudo mkdir /tmp/.X11-unix && \
     echo 1234 | sudo -S sed -i 's/Exec=chromium-browser/Exec=chromium-browser --disable-dev-shm-usage --no-sandbox/' /usr/share/applications/chromium-browser.desktop && \
+    echo 1234 | sudo -S update-alternatives --set x-www-browser /usr/bin/chromium-browser
     # special addition
     mkdir workspace && \
     cd workspace &&  \
