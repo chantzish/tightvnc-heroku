@@ -126,6 +126,7 @@ RUN export LANG=en_US.UTF-8 && \
         openjdk-8-jdk \
         cabextract \
         xdg-user-dirs-gtk \
+        chromium-browser \
         # for kazam
         python3-xlib \
         python3-cairo \
