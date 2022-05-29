@@ -165,31 +165,16 @@ RUN export LANG=en_US.UTF-8 && \
     mkdir .gdrive && \
     #go get github.com/prasmussen/gdrive && \
     git clone https://github.com/chantzish/dewebsockify.git && \
+    cd dewebsockify && \
+    npm install && \
+    cd .. && \
     echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
     sudo sed -i 's/worker_processes .*;/worker_processes 1;/' /etc/nginx/nginx.conf && \
     sudo sed -i 's/user www-data;//' /etc/nginx/nginx.conf && \
     sudo mkdir /tmp/.X11-unix && \
     echo 1234 | sudo -S sed -i 's/Exec=chromium-browser/Exec=chromium-browser --disable-dev-shm-usage --no-sandbox/' /usr/share/applications/chromium-browser.desktop && \
+    echo 1234 | sudo -S xdg-settings set default-web-browser chromium-browser.desktop && \
     echo '#!/bin/sh\nexec /usr/bin/chromium-browser --disable-dev-shm-usage --no-sandbox "$@"' | sudo tee /usr/local/bin/chromium-browser && \
     echo 1234 | sudo -S chmod +x /usr/local/bin/chromium-browser && \
-    echo 1234 | sudo -S update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-browser 100 && \
-    # special addition
-    mkdir workspace && \
-    cd workspace &&  \
-    wget -q https://github.com/qpdf/qpdf/releases/download/release-qpdf-10.6.3.0cmake1/qpdf-10.6.3.0cmake1.tar.gz && \
-    tar xf qpdf-10.6.3.0cmake1.tar.gz && \
-    cd qpdf-10.6.3/ && \
-    cmake -S . -B build && \
-    cmake --build build &&\
-    sudo cmake --install build && \
-    sudo ldconfig && \
-    cd ~ && \
-    rm -rf workspace && \
-    mkdir -p ~/Downloads/Telegram\ Desktop && \
-    cd ~/Downloads/Telegram\ Desktop && \
-    python3.8 -m venv env && \
-    . env/bin/activate && \
-    pip install wheel && \
-    pip install git+https://github.com/chantzish/pikepdf.git && \
-    deactivate
+    echo 1234 | sudo -S update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-browser 100
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
