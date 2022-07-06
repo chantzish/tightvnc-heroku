@@ -127,6 +127,7 @@ RUN export LANG=en_US.UTF-8 && \
         cabextract \
         xdg-user-dirs-gtk \
         chromium-browser \
+        gpicview \
         # for kazam
         python3-xlib \
         python3-cairo \
