@@ -176,5 +176,6 @@ RUN export LANG=en_US.UTF-8 && \
     echo 1234 | sudo -S xdg-settings set default-web-browser chromium-browser.desktop && \
     echo '#!/bin/sh\nexec /usr/bin/chromium-browser --disable-dev-shm-usage --no-sandbox "$@"' | sudo tee /usr/local/bin/chromium-browser && \
     echo 1234 | sudo -S chmod +x /usr/local/bin/chromium-browser && \
-    echo 1234 | sudo -S update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-browser 100
+    echo 1234 | sudo -S update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-browser 100 && \
+    echo 1234 | sudo -S sed -i 's:#!/bin/sh:#!/bin/sh\nunset DBUS_SESSION_BUS_ADDRESS:' /usr/bin/xdg-open
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
