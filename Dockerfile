@@ -31,6 +31,7 @@ RUN export LANG=en_US.UTF-8 && \
     sudo add-apt-repository ppa:deadsnakes && \
     sudo apt-add-repository universe && \
     sudo apt-add-repository ppa:transmissionbt && \
+    sudo add-apt-repository ppa:savoury1/ffmpeg4 && \
     sudo add-apt-repository ppa:sylvain-pineau/kazam && \
     wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
     sudo apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" && \
