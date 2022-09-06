@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 RUN apt update && apt install -y sudo && useradd -D -s /bin/bash && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | passwd user && mkdir -p /home/user/.local/share/applications && mkdir -p /home/user/.local/bin && chown -R 1000:1000 /home/user
 USER 1000
 WORKDIR /home/user
-COPY fly.toml /home/user/fly.toml
+#COPY fly.toml /home/user/fly.toml
 COPY nginx.template /home/user/nginx.template
 COPY launch.sh /home/user/launch.sh
 COPY launch-gui.sh /home/user/launch-gui.sh
@@ -14,7 +14,7 @@ COPY gdrive /home/user/.local/bin/gdrive
 RUN export LANG=en_US.UTF-8 && \
     echo 1234 | sudo -S apt update && \
     echo "Set disable_coredump false" | sudo tee /etc/sudo.conf && \
-    echo 1234 | sudo -S chown 1000:1000 fly.toml nginx.template launch.sh launch-gui.sh Dockerfile ".local/share/applications/userapp-Telegram Desktop-0OX5L1.desktop" .local/share/applications/appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop .local/bin/gdrive && \
+    echo 1234 | sudo -S chown 1000:1000 nginx.template launch.sh launch-gui.sh Dockerfile ".local/share/applications/userapp-Telegram Desktop-0OX5L1.desktop" .local/share/applications/appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop .local/bin/gdrive && \
     chmod +x launch.sh launch-gui.sh .local/bin/gdrive && \
     echo 1234 | sudo -S DEBIAN_FRONTEND=noninteractive apt install -y keyboard-configuration locales tzdata && \
     echo 1234 | sudo -S apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg software-properties-common lsb-release && \
