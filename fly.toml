@@ -20,10 +20,10 @@ processes = []
   GIT_NAME="chantzish"
   LAUNCH_RUNTIME='''
 # adding swap
-sudo fallocate -l 1G /swapfile
-sudo chmod 600 /swapfile 
-sudo mkswap /swapfile 
-sudo swapon /swapfile
+echo 1234 | sudo -S fallocate -l 1G /swapfile
+echo 1234 | sudo -S chmod 600 /swapfile 
+echo 1234 | sudo -S mkswap /swapfile 
+echo 1234 | sudo -S swapon /swapfile
 
 export HOME=/home/user
 export USER=`whoami`

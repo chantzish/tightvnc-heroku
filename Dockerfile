@@ -158,6 +158,7 @@ RUN export LANG=en_US.UTF-8 && \
     echo Ciphers +aes128-cbc | sudo tee -a /etc/ssh/sshd_config && \
     echo 1234 | sudo -S sed -i 's/#Port 22/Port 2200/' /etc/ssh/sshd_config && \
     echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
+    echo 1234 | sudo -S mkdir -p /run/sshd && \
     if [ ! -d ".ssh" ]; then mkdir -p .ssh; fi && \
     chmod 700 ~/.ssh && \
     if [ ! -d ".vnc" ]; then mkdir -p .vnc; fi && \
