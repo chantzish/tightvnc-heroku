@@ -19,6 +19,12 @@ processes = []
   GIT_EMAIL="chantzish@gmail.com"
   GIT_NAME="chantzish"
   LAUNCH_RUNTIME='''
+# adding swap
+sudo fallocate -l 1G /swapfile
+sudo chmod 600 /swapfile 
+sudo mkswap /swapfile 
+sudo swapon /swapfile
+
 export HOME=/home/user
 export USER=`whoami`
 export LANG=en_US.UTF-8
@@ -30,22 +36,25 @@ touch /opt/noVNC/`whoami`
 cd /opt/noVNC && ./utils/novnc_proxy --listen 6080 --vnc localhost:5901 --heartbeat 30 &
 printf "%s" "$AUTH_KEYS" > .ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
-#/opt/noVNC/utils/websockify/run 6090 localhost:2200 --heartbeat=45 &
-#/usr/sbin/sshd -p 2200 -o AuthorizedKeysFile=/home/user/.ssh/authorized_keys &
+echo 1234 | sudo -S mkdir -p /run/sshd
+/opt/noVNC/utils/websockify/run 6090 localhost:2200 --heartbeat=45 &
+echo 1234 | sudo -S /usr/sbin/sshd -p 2200 -o AuthorizedKeysFile=/home/user/.ssh/authorized_keys &
 
-cd ~
+#cd ~
 # fix according to site
 #echo '#!/bin/sh\n\nwhile :; do wget '$APP_NAME'.herokuapp.com -q -O /dev/null -o /dev/null; sleep 4m; done &' | tee .local/bin/stop.sh
 #chmod +x .local/bin/stop.sh
 
 
 #mkdir -m 1777 /tmp/.X11-unix
-#mkdir .vnc
+mkdir -p .vnc
 printf "%s" "$VNC_PASS" | vncpasswd -f > /home/user/.vnc/passwd
+chmod 600 /home/user/.vnc/passwd
 printf "%s\n" "$XSTARTUP" > .vnc/xstartup
 chmod +x .vnc/xstartup
 
 printf "%s" "$IDENTITY" > .ssh/id_rsa
+chmod 600 .ssh/id_rsa
 printf "%s" "$GDRIVE_TOKEN" > .gdrive/token_v2.json
 gdrive download $TELEGRAM_LOCAL
 tar zxf telegram.local.tar.gz
@@ -63,7 +72,7 @@ touch ~/.Xauthority
 #xauth generate $DISPLAY . trusted
 vncserver -geometry 1536x754 :1
 '''
-#  PORT=8080
+  PORT=8080
   TRANSMISSION_SETTINGS='''
 {
     "alt-speed-down": 50,
@@ -204,3 +213,11 @@ vncconfig -nowin &
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+[[services]]
+  internal_port = 2200
+  protocol = "tcp"
+#  processes = ["app"]
+
+  [[services.ports]]
+    port = "2200"

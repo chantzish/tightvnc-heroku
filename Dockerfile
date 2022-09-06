@@ -176,7 +176,8 @@ RUN export LANG=en_US.UTF-8 && \
     echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
     sudo sed -i 's/worker_processes .*;/worker_processes 1;/' /etc/nginx/nginx.conf && \
     sudo sed -i 's/user www-data;//' /etc/nginx/nginx.conf && \
-    sudo mkdir /tmp/.X11-unix && \
+    echo 1234 | sudo -S mkdir /tmp/.X11-unix && \
+    echo 1234 | sudo -S chmod 1777 /tmp/.X11-unix && \
     echo 1234 | sudo -S sed -i 's/Exec=chromium-browser/Exec=chromium-browser --disable-dev-shm-usage --no-sandbox/' /usr/share/applications/chromium-browser.desktop && \
     echo 1234 | sudo -S xdg-settings set default-web-browser chromium-browser.desktop && \
     echo '#!/bin/sh\nexec /usr/bin/chromium-browser --disable-dev-shm-usage --no-sandbox "$@"' | sudo tee /usr/local/bin/chromium-browser && \
