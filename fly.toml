@@ -63,6 +63,7 @@ touch ~/.Xauthority
 #xauth generate $DISPLAY . trusted
 vncserver -geometry 1536x754 :1
 '''
+#  PORT=8080
   TRANSMISSION_SETTINGS='''
 {
     "alt-speed-down": 50,
