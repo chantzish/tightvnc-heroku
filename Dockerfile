@@ -160,7 +160,7 @@ RUN export LANG=en_US.UTF-8 && \
     if [ ! -d ".vnc" ]; then mkdir -p .vnc; fi && \
     chmod 700 ~/.vnc && \
     if [ ! -d ".local/bin" ]; then mkdir -p .local/bin; fi && \
-    wget -q -O- https://telegram.org/dl/desktop/linux | sudo tar xJ -C /opt/ && \
+    #wget -q -O- https://telegram.org/dl/desktop/linux | sudo tar xJ -C /opt/ && \
     echo 1234 | sudo -S ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && \
     echo 1234 | sudo -S chown -R 1000:1000 /opt && \
     echo 1234 | sudo -S chmod 755 -R /opt && \
