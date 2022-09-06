@@ -72,7 +72,7 @@ touch ~/.Xauthority
 #xauth generate $DISPLAY . trusted
 vncserver -geometry 1536x754 :1
 '''
-  PORT=8080
+  PORT=80
   TRANSMISSION_SETTINGS='''
 {
     "alt-speed-down": 50,
@@ -188,9 +188,17 @@ vncconfig -nowin &
   allowed_public_ports = []
   auto_rollback = true
 
+
+#[[services]]
+#  internal_port = 2200
+#  protocol = "tcp"
+
+#  [[services.ports]]
+#    port = "5000"
+
 [[services]]
   http_checks = []
-  internal_port = 8080
+  internal_port = 80
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
@@ -214,10 +222,3 @@ vncconfig -nowin &
     restart_limit = 0
     timeout = "2s"
 
-[[services]]
-  internal_port = 2200
-  protocol = "tcp"
-#  processes = ["app"]
-
-  [[services.ports]]
-    port = "2200"
