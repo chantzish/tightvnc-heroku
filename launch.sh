@@ -2,4 +2,4 @@
 
 export DOLLAR='$'
 envsubst < nginx.template > /etc/nginx/sites-enabled/default
-nginx -g 'daemon off;'
+echo 1234 | sudo -S nginx -g 'daemon off;'
