@@ -38,7 +38,7 @@ RUN export LANG=en_US.UTF-8 && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     echo 1234 | sudo -S dpkg --add-architecture i386 && \
     echo 1234 | sudo -S apt update && \
-    echo 1234 | sudo -S apt install -y \
+    echo 1234 | sudo -S apt install -y --allow-downgrades \
         # fix bug
         libsystemd0=237-3ubuntu10.53 \
         libudev1=237-3ubuntu10.53 \
