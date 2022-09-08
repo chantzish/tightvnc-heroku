@@ -158,7 +158,7 @@ RUN export LANG=en_US.UTF-8 && \
     echo Ciphers +aes128-cbc | sudo tee -a /etc/ssh/sshd_config && \
     echo 1234 | sudo -S sed -i 's/#Port 22/Port 2200/' /etc/ssh/sshd_config && \
     echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
-    echo 1234 | sudo -S mkdir -p /run/sshd && \
+    if [ ! -d "/run/sshd" ]; then echo 1234 | sudo -S mkdir -p /run/sshd; fi && \
     if [ ! -d ".ssh" ]; then mkdir -p .ssh; fi && \
     chmod 700 ~/.ssh && \
     if [ ! -d ".vnc" ]; then mkdir -p .vnc; fi && \
@@ -174,16 +174,17 @@ RUN export LANG=en_US.UTF-8 && \
     cd dewebsockify && \
     npm install && \
     cd .. && \
-    echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
+    #echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
     sudo sed -i 's/worker_processes .*;/worker_processes 1;/' /etc/nginx/nginx.conf && \
     sudo sed -i 's/user www-data;//' /etc/nginx/nginx.conf && \
     echo 1234 | sudo -S mkdir /tmp/.X11-unix && \
     echo 1234 | sudo -S chmod 1777 /tmp/.X11-unix && \
-    echo 1234 | sudo -S sed -i 's/Exec=chromium-browser/Exec=chromium-browser --disable-dev-shm-usage --no-sandbox/' /usr/share/applications/chromium-browser.desktop && \
+    #echo 1234 | sudo -S sed -i 's/Exec=chromium-browser/Exec=chromium-browser --disable-dev-shm-usage --no-sandbox/' /usr/share/applications/chromium-browser.desktop && \
     echo 1234 | sudo -S xdg-settings set default-web-browser chromium-browser.desktop && \
-    echo '#!/bin/sh\nexec /usr/bin/chromium-browser --disable-dev-shm-usage --no-sandbox "$@"' | sudo tee /usr/local/bin/chromium-browser && \
-    echo 1234 | sudo -S chmod +x /usr/local/bin/chromium-browser && \
-    echo 1234 | sudo -S update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-browser 100 && \
+    #echo '#!/bin/sh\nexec /usr/bin/chromium-browser --disable-dev-shm-usage --no-sandbox "$@"' | sudo tee /usr/local/bin/chromium-browser && \
+    #echo 1234 | sudo -S chmod +x /usr/local/bin/chromium-browser && \
+    #echo 1234 | sudo -S update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-browser 100 && \
+    echo 1234 | sudo -S update-alternatives --set x-www-browser /usr/bin/chromium-browser && \
     echo 1234 | sudo -S sed -i 's:#!/bin/sh:#!/bin/sh\nunset DBUS_SESSION_BUS_ADDRESS:' /usr/bin/xdg-open
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
 EXPOSE 2200/tcp
