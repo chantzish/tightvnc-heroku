@@ -24,10 +24,13 @@ destination="/storage"
   GIT_NAME="chantzish"
   LAUNCH_RUNTIME='''
 # adding swap
-echo 1234 | sudo -S fallocate -l 1G /swapfile
-echo 1234 | sudo -S chmod 600 /swapfile 
-echo 1234 | sudo -S mkswap /swapfile 
-echo 1234 | sudo -S swapon /swapfile
+#echo 1234 | sudo -S fallocate -l 1G /swapfile
+#echo 1234 | sudo -S chmod 600 /swapfile 
+#echo 1234 | sudo -S mkswap /swapfile 
+#echo 1234 | sudo -S swapon /swapfile
+echo 1234 | sudo -S umount /storage/
+echo 1234 | sudo -S mkswap /dev/vdc
+echo 1234 | sudo -S swapon /dev/vdc
 
 export HOME=/home/user
 export USER=`whoami`
