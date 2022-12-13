@@ -196,6 +196,6 @@ RUN export LANG=en_US.UTF-8 && \
     sudo sed -i 's:#!/bin/sh:#!/bin/sh\nunset DBUS_SESSION_BUS_ADDRESS:' /usr/bin/xdg-open
     #dd if=/dev/zero of=largefile bs=4k iflag=fullblock,count_bytes count=8G
 USER 0
-ENV PORT=80
+#ENV PORT=80
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
-EXPOSE 80/tcp
+#EXPOSE 80/tcp
