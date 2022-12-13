@@ -20,22 +20,22 @@ COPY appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop /home
 COPY userapp-Telegram* /home/user/.local/share/applications/
 COPY gdrive /home/user/.local/bin/gdrive
 RUN export LANG=en_US.UTF-8 && \
-    echo 1234 | sudo -S apt update && \
+    sudo apt update && \
     echo "Set disable_coredump false" | sudo tee /etc/sudo.conf && \
-    echo 1234 | sudo -S chown 1000:1000 nginx.template launch.sh launch-gui.sh Dockerfile ".local/share/applications/userapp-Telegram Desktop-0OX5L1.desktop" .local/share/applications/appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop .local/bin/gdrive && \
+    sudo chown 1000:1000 nginx.template launch.sh launch-gui.sh Dockerfile ".local/share/applications/userapp-Telegram Desktop-0OX5L1.desktop" .local/share/applications/appimagekit_46924f6eb8394393510aa1031f302145-Telegram_Desktop.desktop .local/bin/gdrive && \
     chmod +x launch.sh launch-gui.sh .local/bin/gdrive && \
-    echo 1234 | sudo -S DEBIAN_FRONTEND=noninteractive apt install -y keyboard-configuration locales tzdata && \
-    echo 1234 | sudo -S apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg software-properties-common lsb-release && \
-    echo 1234 | sudo -S locale-gen en_IL en_US.UTF-8 && \
-    echo 1234 | sudo -S update-locale LANG=en_US.UTF-8 && \
-    echo 1234 | sudo -S dpkg-reconfigure --frontend=noninteractive locales && \
-    echo 1234 | sudo -S locale-gen en_IL en_US.UTF-8 && \
-    echo 1234 | sudo -S update-locale LANG=en_IL && \
-    echo 1234 | sudo -S dpkg-reconfigure --frontend=noninteractive locales && \
+    sudo DEBIAN_FRONTEND=noninteractive apt install -y keyboard-configuration locales tzdata && \
+    sudo apt install -y whiptail apt-utils libterm-readline-gnu-perl locales apt-transport-https curl wget gnupg software-properties-common lsb-release && \
+    sudo locale-gen en_IL en_US.UTF-8 && \
+    sudo update-locale LANG=en_US.UTF-8 && \
+    sudo dpkg-reconfigure --frontend=noninteractive locales && \
+    sudo locale-gen en_IL en_US.UTF-8 && \
+    sudo update-locale LANG=en_IL && \
+    sudo dpkg-reconfigure --frontend=noninteractive locales && \
     echo '# KEYBOARD CONFIGURATION FILE\n\n# Consult the keyboard(5) manual page.\n\nXKBMODEL="pc105"\nXKBLAYOUT="us,il"\nXKBVARIANT=","\nXKBOPTIONS="grp:alt_shift_toggle,grp_led:scroll"\n\nBACKSPACE="guess"' | sudo tee /etc/default/keyboard && \
     echo "Asia/Jerusalem" | sudo tee /etc/timezone && \
-    echo 1234 | sudo -S ln -snf /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
-    echo 1234 | sudo -S dpkg-reconfigure --frontend=noninteractive keyboard-configuration tzdata && \
+    sudo ln -snf /usr/share/zoneinfo/Asia/Jerusalem /etc/localtime && \
+    sudo dpkg-reconfigure --frontend=noninteractive keyboard-configuration tzdata && \
     sudo add-apt-repository ppa:deadsnakes && \
     sudo apt-add-repository universe && \
     sudo apt-add-repository ppa:transmissionbt && \
@@ -44,9 +44,9 @@ RUN export LANG=en_US.UTF-8 && \
     wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
     sudo apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" && \
     curl -sL https://deb.nodesource.com/setup_12.x | sed 's/sleep/echo sleep/' | sudo -E bash - && \
-    echo 1234 | sudo -S dpkg --add-architecture i386 && \
-    echo 1234 | sudo -S apt update && \
-    echo 1234 | sudo -S apt install -y --allow-downgrades \
+    sudo dpkg --add-architecture i386 && \
+    sudo apt update && \
+    sudo apt install -y --allow-downgrades \
         # fix bug
         #libsystemd0=237-3ubuntu10.53 \
         #libudev1=237-3ubuntu10.53 \
@@ -146,26 +146,26 @@ RUN export LANG=en_US.UTF-8 && \
         gir1.2-gudev-1.0 \
         kazam \
         && \
-    echo 1234 | sudo -S git clone https://github.com/novnc/noVNC.git /opt/noVNC && \
-    echo 1234 | sudo -S git clone https://github.com/novnc/websockify /opt/noVNC/utils/websockify && \
+    sudo git clone https://github.com/novnc/noVNC.git /opt/noVNC && \
+    sudo git clone https://github.com/novnc/websockify /opt/noVNC/utils/websockify && \
     wget https://github.com/novnc/websockify/raw/master/websockify/websocket.py && \
     wget https://github.com/chantzish/python-dewebsockify/raw/master/dewebsockify.py && \
-    echo 1234 | sudo -S sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config && \
-    echo 1234 | sudo -S sed -i 's/NotShowIn=/NotShowIn=LXDE;/' /etc/xdg/autostart/update-notifier.desktop && \
-    #echo 1234 | sudo -S sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nNotShowIn=LXDE;/' /etc/xdg/autostart/xdg-user-dirs.desktop && \
-    echo 1234 | sudo -S sed -i 's/NotShowIn=/NotShowIn=LXDE;/' /etc/xdg/autostart/nm-applet.desktop && \
-    (echo 1234 | sudo -S sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties || true) && \
-    echo 1234 | sudo -S sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
-    echo 1234 | sudo -S sed -i 's/load-module module-detect/#load-module module-detect/' /etc/pulse/default.pa && \
-    echo 1234 | sudo -S sed -i 's/load-module module-bluetooth-discover/#load-module module-bluetooth-discover/' /etc/pulse/default.pa && \
-    echo 1234 | sudo -S sed -i 's/load-module module-bluetooth-policy/#load-module module-bluetooth-policy/' /etc/pulse/default.pa && \
-    echo 1234 | sudo -S sed -i 's/#load-module module-native-protocol-tcp/load-module module-native-protocol-tcp auth-anonymous=1/' /etc/pulse/default.pa && \
+    sudo sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config && \
+    sudo sed -i 's/NotShowIn=/NotShowIn=LXDE;/' /etc/xdg/autostart/update-notifier.desktop && \
+    #sudo sed -i 's/\[Desktop Entry\]/[Desktop Entry]\nNotShowIn=LXDE;/' /etc/xdg/autostart/xdg-user-dirs.desktop && \
+    sudo sed -i 's/NotShowIn=/NotShowIn=LXDE;/' /etc/xdg/autostart/nm-applet.desktop && \
+    (sudo sed -i 's/assistive_technologies=org.GNOME.Accessibility.AtkWrapper/#assistive_technologies=org.GNOME.Accessibility.AtkWrapper/' /etc/java-8-openjdk/accessibility.properties || true) && \
+    sudo sed -i 's/load-module module-udev-detect/#load-module module-udev-detect/' /etc/pulse/default.pa && \
+    sudo sed -i 's/load-module module-detect/#load-module module-detect/' /etc/pulse/default.pa && \
+    sudo sed -i 's/load-module module-bluetooth-discover/#load-module module-bluetooth-discover/' /etc/pulse/default.pa && \
+    sudo sed -i 's/load-module module-bluetooth-policy/#load-module module-bluetooth-policy/' /etc/pulse/default.pa && \
+    sudo sed -i 's/#load-module module-native-protocol-tcp/load-module module-native-protocol-tcp auth-anonymous=1/' /etc/pulse/default.pa && \
     echo KexAlgorithms +diffie-hellman-group1-sha1 | sudo tee -a /etc/ssh/sshd_config && \
     echo "#HostKeyAlgorithms +ssh-dss" | sudo tee -a /etc/ssh/sshd_config && \
     echo "#MACs +hmac-sha1" | sudo tee -a /etc/ssh/sshd_config && \
     echo Ciphers +aes128-cbc | sudo tee -a /etc/ssh/sshd_config && \
-    echo 1234 | sudo -S sed -i 's/#Port 22/Port 2200/' /etc/ssh/sshd_config && \
-    echo 1234 | sudo -S sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
+    sudo sed -i 's/#Port 22/Port 2200/' /etc/ssh/sshd_config && \
+    sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     if [ ! -d "/run/sshd" ]; then echo 1234 | sudo -S mkdir -p /run/sshd; fi && \
     if [ ! -d ".ssh" ]; then mkdir -p .ssh; fi && \
     chmod 700 ~/.ssh && \
@@ -173,28 +173,29 @@ RUN export LANG=en_US.UTF-8 && \
     chmod 700 ~/.vnc && \
     if [ ! -d ".local/bin" ]; then mkdir -p .local/bin; fi && \
     #wget -q -O- https://telegram.org/dl/desktop/linux | sudo tar xJ -C /opt/ && \
-    echo 1234 | sudo -S ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && \
-    echo 1234 | sudo -S chown -R 1000:1000 /opt && \
-    echo 1234 | sudo -S chmod 755 -R /opt && \
+    sudo ln -s /opt/Telegram/Telegram /usr/local/bin/telegram-desktop && \
+    sudo chown -R 1000:1000 /opt && \
+    sudo chmod 755 -R /opt && \
     mkdir .gdrive && \
     #go get github.com/prasmussen/gdrive && \
     git clone https://github.com/chantzish/dewebsockify.git && \
     cd dewebsockify && \
     npm install && \
     cd .. && \
-    #echo 1234 | sudo -S rm /var/lib/dpkg/statoverride && \
+    #sudo rm /var/lib/dpkg/statoverride && \
     sudo sed -i 's/worker_processes .*;/worker_processes 1;/' /etc/nginx/nginx.conf && \
     sudo sed -i 's/user www-data;//' /etc/nginx/nginx.conf && \
-    echo 1234 | sudo -S mkdir /tmp/.X11-unix && \
-    echo 1234 | sudo -S chmod 1777 /tmp/.X11-unix && \
-    #echo 1234 | sudo -S sed -i 's/Exec=chromium-browser/Exec=chromium-browser --disable-dev-shm-usage --no-sandbox/' /usr/share/applications/chromium-browser.desktop && \
-    echo 1234 | sudo -S xdg-settings set default-web-browser chromium-browser.desktop && \
+    sudo mkdir /tmp/.X11-unix && \
+    sudo chmod 1777 /tmp/.X11-unix && \
+    #sudo sed -i 's/Exec=chromium-browser/Exec=chromium-browser --disable-dev-shm-usage --no-sandbox/' /usr/share/applications/chromium-browser.desktop && \
+    sudo xdg-settings set default-web-browser chromium-browser.desktop && \
     #echo '#!/bin/sh\nexec /usr/bin/chromium-browser --disable-dev-shm-usage --no-sandbox "$@"' | sudo tee /usr/local/bin/chromium-browser && \
-    #echo 1234 | sudo -S chmod +x /usr/local/bin/chromium-browser && \
-    #echo 1234 | sudo -S update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-browser 100 && \
-    echo 1234 | sudo -S update-alternatives --set x-www-browser /usr/bin/chromium-browser && \
-    echo 1234 | sudo -S sed -i 's:#!/bin/sh:#!/bin/sh\nunset DBUS_SESSION_BUS_ADDRESS:' /usr/bin/xdg-open
+    #sudo chmod +x /usr/local/bin/chromium-browser && \
+    #sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/local/bin/chromium-browser 100 && \
+    sudo update-alternatives --set x-www-browser /usr/bin/chromium-browser && \
+    sudo sed -i 's:#!/bin/sh:#!/bin/sh\nunset DBUS_SESSION_BUS_ADDRESS:' /usr/bin/xdg-open
     #dd if=/dev/zero of=largefile bs=4k iflag=fullblock,count_bytes count=8G
+USER 0
+ENV PORT=80
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
 EXPOSE 80/tcp
-ENV PORT=80
