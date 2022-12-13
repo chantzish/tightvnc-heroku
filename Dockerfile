@@ -1,6 +1,14 @@
 # https://github.com/chantzish/tightvnc-heroku/blob/ubuntu18/Dockerfile
 FROM ubuntu:18.04
-RUN apt update && apt install -y sudo && useradd -D -s /bin/bash && useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && yes "1234" | passwd user && mkdir -p /home/user/.local/share/applications && mkdir -p /home/user/.local/bin && chown -R 1000:1000 /home/user
+RUN apt update && apt install -y sudo && \
+    useradd -D -s /bin/bash && \
+    useradd -u 1000 -U -G adm,cdrom,sudo,dip,plugdev -s /bin/bash -m user && \
+    yes "1234" | passwd user && \
+    mkdir -p /home/user/.local/share/applications && \
+    mkdir -p /home/user/.local/bin && \
+    chown -R 1000:1000 /home/user && \
+    echo 'user ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/100-oracle-cloud-agent-users && \
+    chmod 440 /etc/sudoers.d/100-oracle-cloud-agent-users
 USER 1000
 WORKDIR /home/user
 #COPY fly.toml /home/user/fly.toml
@@ -188,4 +196,5 @@ RUN export LANG=en_US.UTF-8 && \
     echo 1234 | sudo -S sed -i 's:#!/bin/sh:#!/bin/sh\nunset DBUS_SESSION_BUS_ADDRESS:' /usr/bin/xdg-open
     #dd if=/dev/zero of=largefile bs=4k iflag=fullblock,count_bytes count=8G
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
-EXPOSE 2200/tcp
+EXPOSE 80/tcp
+ENV PORT=80
