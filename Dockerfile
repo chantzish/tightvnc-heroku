@@ -166,6 +166,7 @@ RUN export LANG=en_US.UTF-8 && \
     echo Ciphers +aes128-cbc | sudo tee -a /etc/ssh/sshd_config && \
     sudo sed -i 's/#Port 22/Port 2200/' /etc/ssh/sshd_config && \
     sudo sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
+    sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     if [ ! -d "/run/sshd" ]; then echo 1234 | sudo -S mkdir -p /run/sshd; fi && \
     if [ ! -d ".ssh" ]; then mkdir -p .ssh; fi && \
     chmod 700 ~/.ssh && \
@@ -195,7 +196,7 @@ RUN export LANG=en_US.UTF-8 && \
     sudo update-alternatives --set x-www-browser /usr/bin/chromium-browser && \
     sudo sed -i 's:#!/bin/sh:#!/bin/sh\nunset DBUS_SESSION_BUS_ADDRESS:' /usr/bin/xdg-open
     #dd if=/dev/zero of=largefile bs=4k iflag=fullblock,count_bytes count=8G
-#USER 0
+USER 0
 #ENV PORT=80
 CMD /home/user/launch-gui.sh & /home/user/launch.sh 
 #EXPOSE 80/tcp
