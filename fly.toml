@@ -5,9 +5,9 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
-[mounts]
-source="storage"
-destination="/storage"
+#[mounts]
+#source="storage"
+#destination="/storage"
 
 [env]
   APP_NAME="chantzish"
@@ -28,9 +28,9 @@ destination="/storage"
 #echo 1234 | sudo -S chmod 600 /swapfile 
 #echo 1234 | sudo -S mkswap /swapfile 
 #echo 1234 | sudo -S swapon /swapfile
-echo 1234 | sudo -S umount /storage/
-echo 1234 | sudo -S mkswap /dev/vdc
-echo 1234 | sudo -S swapon /dev/vdc
+#echo 1234 | sudo -S umount /storage/
+#echo 1234 | sudo -S mkswap /dev/vdc
+#echo 1234 | sudo -S swapon /dev/vdc
 
 export HOME=/home/user
 export USER=`whoami`
@@ -79,7 +79,7 @@ touch ~/.Xauthority
 #xauth generate $DISPLAY . trusted
 vncserver -geometry 1536x754 :1
 '''
-  PORT=80
+  PORT="80"
   TRANSMISSION_SETTINGS='''
 {
     "alt-speed-down": 50,
@@ -224,7 +224,7 @@ vncconfig -nowin &
     port = 443
 
   [[services.tcp_checks]]
-    grace_period = "1s"
+    grace_period = "30s"
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
